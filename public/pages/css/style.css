@@ -4,6 +4,224 @@
     overflow: hidden;
 }
 
+.header-first {
+  background-color: #ffff;
+  border-bottom: 1px solid #eee;
+}
+
+.header-contact {
+    width: 88%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.item-header {
+    display: flex;
+    width: 230px;
+    justify-content: space-between;
+    padding-top: 57px;
+}
+
+.language {
+  border: none;
+  background-color: transparent;
+}
+
+.flag-icon {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+}
+
+.flag {
+  width: 30px;
+  height: 20px;
+}
+span {
+  color: #555;
+}
+
+.language-item {
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 3px 3px 3px 3px #4e4d4d;
+  padding-left: 0;
+  width: 155px;
+  top: 90px;
+  z-index: 999;
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.language-bar {
+  list-style: none;
+  padding: 15px 8px;
+  text-align: left;
+  color: #555;
+  cursor: pointer;
+
+}
+
+.header-logo-image {
+  line-height: 120px;
+  padding-left: 150px;
+}
+
+.myaccount {
+  border: none;
+  background-color: transparent;
+}
+
+.account-item {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px 3px #4e4d4d;
+    right: 195px;
+    width: 240px;
+    top: 90px;
+    z-index: 999;
+    display: none;
+}
+
+.account-bar {
+    width: 93%;
+    height: 36px;
+    background-color: #f76b6a;
+    text-align: center;
+    line-height: 35px;
+    list-style: none;
+    margin: 10px 8px;
+    color: #555;
+    cursor: pointer;
+}
+
+.active-account {
+    display: block;
+}
+
+.account-item > .account-bar > .account-icon {
+    color: #ffff;
+}
+
+/* .account-item > .account-bar > .account-icon:hover {
+    text-decoration: underline;
+    color:  #f76b6a;
+} */
+
+.myaccount:hover {
+    opacity: 0.5;
+}
+
+.language:hover {
+    opacity: 0.5;
+}
+
+.icon-search-head {
+    position: absolute;
+    right: 29px;
+    top: 55px;
+}
+
+.search-icon {
+    color: rgb(128, 123, 123);
+    font-size: 20px;
+  }
+
+.search-icon:hover {
+    color:  #f76b6a;
+}
+
+  .modal-content {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .modal-header {
+    background-color: #f76b6a;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+  }
+
+  .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .close-icon {
+    position: absolute;
+    right: 25px;
+    font-size: 33px;
+    top: 14px;;
+  }
+
+  .modal-body {
+    padding: 20px;
+    height: 200px;
+  }
+
+  .modal input[type="search"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .modal button[type="submit"] {
+    background-color: #f76b6a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media (min-width: 768px) {
+    .modal-dialog {
+      max-width: 600px;
+    }
+  }
+
+  .form-inline {
+    display: flex;
+  }
+
+.banner-head  {
+    height: 131px;
+    background: url(https://misahouse.com/wp-content/themes/elessi-theme/admin/assets/images/breadcrumb-bg.jpg);
+    background-size: cover;
+}
+
+.url-main {
+  text-align: center;
+  line-height: 110px;
+  font-size: 20px;
+}
+
+.url-main  .url-menu {
+    background-color: transparent;
+}
+
+.url-menu > li > a {
+    color: #f76b6a;
+}
+
+.url-title {
+    margin-bottom: -81px;
+    color: #f76b6a;
+
+}
+
 .fixNav {
     width: 100%;
     position: fixed;
@@ -134,7 +352,7 @@ a:focus {
 
 /* banner............................................ */
 .header {
-    background: #468af7;
+    background: #f76b6a;
     top: 0;
     left: 0;
     right: 0;
@@ -147,29 +365,41 @@ a:focus {
 /* header-bottom ......................................*/
 
 .menu {
-        padding: 21px 0px;
-    font-size: 14px;
-    color: var(--text-opacity);
+    padding: 21px 0px;
+    font-size: 17px;
+    color: #ffff;
     position: relative;
+    transition: all 0.2s ease-in-out;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
 }
 
 .menu:hover {
     cursor: pointer;
-    color: var(--primary-color);
-    text-decoration: none;
+    color: #ffff;
 }
+
+.menu:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    height: 1px;
+    width: 0;
+    transition: all 0.2s ease-in-out;
+    border-bottom: 2px solid #ffff;
+    padding-top: -10px;
+  }
+
+.menu:hover:after {
+    width: 100%;
+  }
 
 .header-bottom {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
     max-height: 40px;
-}
-
-.header-bottom_logo {
-    width: 230px;
-    height: 50px;
-    margin-right: 70px;
 }
 
 .header-bottom_logo img {
@@ -266,6 +496,8 @@ a:focus {
 .introduce-container {
     position: relative;
     text-transform: uppercase;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
 }
 
 .introduce-container::before {
@@ -372,18 +604,6 @@ a:focus {
     align-items: center;
     flex-wrap: wrap;
     line-height: var(--nav-height);
-    background-color: var(--white-color);
-}
-
-.nav-item {
-    font-size: 14px;
-    color: var(--text-opacity);
-    position: relative;
-}
-
-.nav-item:hover {
-    cursor: pointer;
-    color: var(--primary-color);
 }
 
 .nav-item:hover .bar-item_propose {
@@ -884,8 +1104,8 @@ a:focus {
 #backtop {
     width: 55px;
     height: 55px;
-    background: var(--primary-color);
-    color: #fff;
+    background-color: #f76b6a;
+    color: #ffff;
     display: flex;
     justify-content: center;
     align-items: center;

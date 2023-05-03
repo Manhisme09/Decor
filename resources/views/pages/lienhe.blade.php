@@ -3,11 +3,19 @@
     <title>Thông tin liên hệ | Nội thất Furnibuy</title>
 @endsection
 @section('content')
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-            <span><a href="{{ route('pages.lienhe') }}">Liên hệ</a></span>
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Liên hệ</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="main">
             <div class="grid wide">
                 <div class="contact-title">

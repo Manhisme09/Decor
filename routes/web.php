@@ -42,7 +42,6 @@ Route::post('dang-nhap', [AuthController::class, 'postUserLogin'])->name('pages.
 Route::get('dang-xuat', [AuthController::class, 'userLogout'])->name('pages.dangxuat');
 Route::get('san-pham/{id}', [PageController::class, 'getProduct'])->name('pages.product');
 Route::get('chi-tiet-san-pham/{slug}&id={id}', [PageController::class, 'getProductDetail'])->name('pages.chitietsanpham');
-Route::get('gioi-thieu', [PageController::class, 'gioiThieu'])->name('pages.gioithieu');
 Route::get('lien-he', [PageController::class, 'getLienhe'])->name('pages.lienhe');
 Route::get('gio-hang', [CartController::class, 'getCart'])->name('pages.giohang');
 Route::get('them-gio-hang/{id}', [CartController::class, 'addCart'])->name('pages.themgiohang');

@@ -103,6 +103,21 @@
                 siiimpleToast.success('Cập nhật giỏ hàng thành công!');
             })
         }
+
+        $(document).ready(function() {
+            $('.language').click(function () {
+                $('.language-item').toggleClass('active');
+            });
+
+        });
+
+        $(document).ready(function() {
+            $('.myaccount').click(function () {
+                $('.account-item').toggleClass('active-account');
+            });
+
+        });
+
     </script>
     @yield('script')
 </body>
