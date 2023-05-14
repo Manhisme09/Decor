@@ -3,11 +3,19 @@
     <title>Giỏ hàng | Nội thất Furnibuy</title>
 @endsection
 @section('content')
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-            <span><a href="{{ route('pages.giohang') }}">Giỏ hàng</a></span>
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="main">
             <div class="grid wide">
                 <div class="cart-title">
@@ -34,13 +42,13 @@
                                     @endphp
                                     @foreach (Session::get('Cart')->sanpham as $item)
                                         <tr align="center">
-                                            <td>{{ $s++ }}</td>
-                                            <td>{{ $item['sanphamInfo']->ten_san_pham }}</td>
+                                            <td style="vertical-align: middle">{{ $s++ }}</td>
+                                            <td style="vertical-align: middle">{{ $item['sanphamInfo']->ten_san_pham }}</td>
                                             <td><img src="{{ asset($item['sanphamInfo']->hinh_anh) }}" alt=""
                                                     width="180px" height="120px"></td>
-                                            <td> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
+                                            <td style="vertical-align: middle"> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
 
-                                            <td><select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
+                                            <td style="vertical-align: middle"><select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
                                                     data-idselect="{{ $item['sanphamInfo']->id }}"
                                                     onchange="updateItemCart({{ $item['sanphamInfo']->id }})"
                                                     style="width: 75px; height:30px">
@@ -52,7 +60,7 @@
                                                 </select>
                                             </td>
 
-                                            <td>
+                                            <td style="vertical-align: middle">
                                                 <a class="remove" style="cursor: pointer"
                                                     onclick="deleteCart({{ $item['sanphamInfo']->id }})"
                                                     title="Xoá sản phẩm"><i class="fa fa-trash"></i></a>

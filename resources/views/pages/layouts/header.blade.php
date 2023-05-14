@@ -22,6 +22,7 @@
                         </div>
                     </button>
                     <ul class="account-item">
+                        <div class="arrow"><i class="fas fa-caret-up fa-lg"></i></div>
                         <li class="account-bar">
                             <a class="account-icon" href="{{ route('pages.dangnhap') }}">
                                 Đăng nhập
@@ -69,6 +70,19 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="icon-cart">
+                    <a href="{{ route('pages.giohang') }}">
+                        <i class="fas fa-shopping-cart fa-lg"><span class="count-item">
+                            @if (isset(Session::get('Cart')->tongsoluong))
+                            {{ number_format(Session::get('Cart')->tongsoluong) }}
+                        @else
+                            0
+                        @endif
+                        </span></i>
+                    </a>
+                </div>
+
                 <div class="icon-search-head">
                     <a href="#" class="search-icon" data-toggle="modal" data-target="#searchModal">
                         <i class="fas fa-search fa-lg"></i>

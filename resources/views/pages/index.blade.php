@@ -20,12 +20,12 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="{{ asset('images/slide/slide1.jpg') }}" alt="">
+                                <img style="width:100%; height:500px" src="{{ asset('images/slide/slide1.jpg') }}" alt="">
                             </div>
 
                             @foreach ($slide as $item)
                             <div class="item">
-                                <img src="{{ asset($item->image) }}" alt="">
+                                <img style="width:100%; height:500px" src="{{ asset($item->image) }}" alt="">
                             </div>
                             @endforeach
 

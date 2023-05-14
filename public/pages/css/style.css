@@ -19,7 +19,7 @@
 
 .item-header {
     display: flex;
-    width: 230px;
+    width: 266px;
     justify-content: space-between;
     padding-top: 57px;
 }
@@ -81,7 +81,7 @@ span {
     position: absolute;
     background-color: #fff;
     box-shadow: 3px 3px 3px 3px #4e4d4d;
-    right: 195px;
+    right: 240px;
     width: 240px;
     top: 90px;
     z-index: 999;
@@ -108,6 +108,14 @@ span {
     color: #ffff;
 }
 
+.account-item > .arrow {
+    font-size: 25px;
+    position: absolute;
+    top: -22px;
+    right: 45px;
+    color: var(--primary-color);
+}
+
 /* .account-item > .account-bar > .account-icon:hover {
     text-decoration: underline;
     color:  #f76b6a;
@@ -124,7 +132,7 @@ span {
 .icon-search-head {
     position: absolute;
     right: 29px;
-    top: 55px;
+    top: 51px;
 }
 
 .search-icon {
@@ -184,6 +192,32 @@ span {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
+  }
+
+  .icon-cart span{
+    height: 14px;
+    width: 14px;
+    background: var(--primary-color);
+    line-height: 13px;
+    text-align: center;
+    font-weight: 700;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 10px;
+    color: #ffffff;
+    position: absolute;
+    top: -10px;
+    left: 15px;
+  }
+
+  .icon-cart .fa-shopping-cart {
+    color: gray;
+    position: relative;
+    font-size: 20px;
+  }
+
+  .icon-cart .fa-shopping-cart:hover {
+    color: var(--primary-color);
   }
 
   @media (min-width: 768px) {
@@ -488,7 +522,8 @@ a:focus {
 }
 
 .table-cart {
-    background-color: #468af7;
+    background-color: var(--primary-color);
+    color: #fff;
     font-size: 16px;
 }
 /* bar................................ */
@@ -1626,7 +1661,8 @@ a:focus {
     background-color: #ccc;
 }
 .thumbnail:hover .detail {
-    background-color: #ffa500;
+    background-color: var(--primary-color);
+    color: #ffff;
 }
 
 .caption > b {

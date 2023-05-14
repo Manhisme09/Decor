@@ -32,7 +32,7 @@
                                             <div class="caption">
                                                 <b>{{ $bv->tieu_de }}</b>
                                             </div>
-                                            <div class="caption detail">Xem chi tiết</div>
+                                            <div class="caption detail"> Xem chi tiết </div>
                                         </a>
                                     </div>
                                 </div>

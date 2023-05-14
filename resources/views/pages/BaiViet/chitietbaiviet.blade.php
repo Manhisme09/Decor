@@ -21,7 +21,7 @@
         <div class="main">
             <div class="grid wide">
                 <div class="introduce-title" style="display: inherit; text-align:center">
-                    <h3 style="font-weight:bold">{{ $post_detail->tieu_de }}</h3>
+                    <h3 style="font-weight:bold; font-size: 30px">{{ $post_detail->tieu_de }}</h3>
                 </div>
                 <div class="introduce-content">
                     <br>
