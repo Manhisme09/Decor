@@ -28,8 +28,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         view()->composer('pages.layouts.header', function($view){
-            $danhmuc = DanhMuc::select('id', 'ten_danh_muc', 'parent_id')->orderBy('id','asc')->get();
-            $view->with('danhmuc', $danhmuc);
+            $categorys = DanhMuc::select('id', 'ten_danh_muc', 'parent_id')
+                ->where('parent_id', '=', 0)
+                ->whereIn('id', [6, 10])
+                ->orderBy('id','asc')
+                ->get();
+            $categorys_big = DanhMuc::select('id', 'ten_danh_muc', 'parent_id')
+                ->where('parent_id', '=', 0)
+                ->whereNotIn('id', [6, 10])
+                ->orderBy('id', 'asc')
+                ->get();
+            $view->with(compact('categorys', 'categorys_big'));
         });
 
         // view()->Composer('pages.layouts.header', function($view){

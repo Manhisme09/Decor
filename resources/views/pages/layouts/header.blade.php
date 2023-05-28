@@ -1,5 +1,5 @@
 <div class="header">
-    @php $menusHtml = \App\Helpers\Helper::menus($danhmuc); @endphp
+    {{-- @php $menusHtml = \App\Helpers\Helper::menus($danhmuc); @endphp --}}
     <!-- header-info -->
     <div class="header-first">
         <div class="header-contact">
@@ -9,8 +9,9 @@
                 <i class="fab fa-youtube" style="font-size: 17px"></i>
             </div>
             <div class="header-logo-image">
-                <img style="width: 300px;
-                height: 40px" src="{{ asset('images/bannerlogo.png') }}" alt="">
+                <a href="{{ route('TrangChu') }}"> <img style="width: 350px;
+                    height: 100px" src="{{ asset('images/bannerlogo.png') }}" alt="">
+                </a>
             </div>
             <div class="item-header">
                 <div class="multi-myaccount">
@@ -22,7 +23,6 @@
                         </div>
                     </button>
                     <ul class="account-item">
-                        <div class="arrow"><i class="fas fa-caret-up fa-lg"></i></div>
                         <li class="account-bar">
                             <a class="account-icon" href="{{ route('pages.dangnhap') }}">
                                 Đăng nhập
@@ -192,8 +192,48 @@
                             <ul class="nav-list" style="margin-bottom: 0px;">
                                 <li class="nav-item"><a class="menu" href="{{ route('TrangChu') }}">TRANG
                                         CHỦ</a></li>
-                                {!! $menusHtml !!}
-
+                                <li class="nav-item">
+                                    <a class="menu product">Sản Phẩm</a>
+                                    <div class="list-product">
+                                        <ul class="ul-list-product">
+                                        @foreach ($categorys_big as $item)
+                                            <li class="li-list-product">{{ $item->ten_danh_muc}}
+                                                @php
+                                                    $subCategories = \App\Helpers\Helper::getSubCategories($item->id);
+                                                @endphp
+                                                @if ($subCategories->count() > 0)
+                                                <div class="sub-product">
+                                                    <ul class="ul-sub-product">
+                                                        @foreach ($subCategories as $subCategory)
+                                                        <li class="li-sub-product"><a href="/san-pham/{{ $subCategory->id }}">{{ $subCategory->ten_danh_muc }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                        </ul>
+                                    </div>
+                                </li>
+                                @foreach ($categorys as $category)
+                                    <li class = "nav-item many">
+                                        <a class = "menu" href="/san-pham/{{ $category->id }}">
+                                             {{ $category->ten_danh_muc }}
+                                        </a>
+                                        @php
+                                            $subCategories = \App\Helpers\Helper::getSubCategories($category->id);
+                                        @endphp
+                                        @if ($subCategories->count() > 0)
+                                        <div class="bar-item_propose nav-item_propose">
+                                            <ul class="bar-item_propose-list">
+                                                @foreach ($subCategories as $subCategory)
+                                                    <li><a href="/san-pham/{{ $subCategory->id }}">{{ $subCategory->ten_danh_muc }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+                                    </li>
+                                @endforeach
                                 <li class="nav-item"><a class="menu"
                                         href="{{ route('pages.baiviet') }}">TIN TỨC</a>
                                 </li>

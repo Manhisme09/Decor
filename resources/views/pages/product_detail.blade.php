@@ -5,13 +5,20 @@
 @section('content')
     <div class="main">
         <div class="content">
-            <div class="container">
-                <div class="mapping">
-                    <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-                    <span><a href="">{{ $chiTiet->danh_muc->ten_danh_muc }}</a></span> /
-                    <span><a
-                            href="{{ route('pages.chitietsanpham', ['slug' => $chiTiet->slug,'id' => $chiTiet->id]) }}">{{ $chiTiet->ten_san_pham }}</a></span>
+            <div class="banner-head">
+                <div class="banner-head">
+                    <div class="url-main">
+                        <div class="url-title">{{ $chiTiet->ten_san_pham }}</div>
+                        <nav aria-label="breadcrumb row">
+                            <ol class="breadcrumb url-menu">
+                                <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                                <li class="breadcrumb-item"><a href="/san-pham/{{ $chiTiet->danh_muc->id }}">{{ $chiTiet->danh_muc->ten_danh_muc }}</a></li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
+            </div>
+            <div class="container">
                 <div class="sidebar-main">
                     <div class="main-content">
                         <div class="content-product">
@@ -42,8 +49,8 @@
                                         </div>
                                     @else
                                         <div class="buy">
-                                            <p style="color: white; border-color: #ffffff; background-color: #90addd"
-                                                class="btn-buy">Thêm vào
+                                            <p style="color: white; border-color: #ffffff"
+                                                class="btn-not-buy">Thêm vào
                                                 giỏ hàng</p>
                                         </div>
                                     @endif

@@ -20,12 +20,14 @@
     <div class="container">
         <div class="main">
             <div class="grid wide">
-                <div class="introduce-title" style="display: inherit; text-align:center">
-                    <h3 style="font-weight:bold; font-size: 30px">{{ $post_detail->tieu_de }}</h3>
-                </div>
                 <div class="introduce-content">
                     <br>
                     <img style="margin: 20px 0px" src="{{ asset($post_detail->image) }}" alt="">
+                    <div class="introduce-title" style="display: inherit; text-align:center">
+                        <h3 style="font-weight:bold; font-size: 30px">{{ $post_detail->tieu_de }}</h3>
+                    </div>
+                    <br>
+                    <br>
                     <p>{!! $post_detail->noi_dung !!}</p>
                 </div>
             </div>
