@@ -1019,7 +1019,7 @@ a:focus {
 .footer-center {
     background-color: #161616;
     color: var(--white-color);
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 
 .footer-center_title {
@@ -1066,8 +1066,7 @@ a:focus {
 }
 
 .footer-center_item:hover {
-    color: var(--primary-color);
-    cursor: pointer;
+    color: white;
 }
 
 .footer-center_down {
@@ -1104,11 +1103,8 @@ a:focus {
 }
 
 .footer-bottom_about {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    text-align: center;
     padding-top: 12px;
-    padding-bottom: 26px;
     border-top: 2px solid var(--primary-color);
 }
 
