@@ -38,10 +38,10 @@
                         <h3 class="footer-center_title">HỖ TRỢ BÁN HÀNG</h3>
                         <div class="footer-center_line"></div>
                         <ul class="footer-center_list">
-                            <li class="footer-center_item">Hỗ trợ bảo hành: 0378642530</li>
-                            <li class="footer-center_item">Tư vấn mua hàng: 0378542530</li>
-                            <li class="footer-center_item">Đo đạc và tư vấn tận nhà: 0378642530</li>
-                            <li class="footer-center_item">Phản ánh thái độ phục vụ: 0378642530</li>
+                            <li class="footer-center_item">Hỗ trợ bảo hành: 0858901689</li>
+                            <li class="footer-center_item">Tư vấn mua hàng: 0858901689</li>
+                            <li class="footer-center_item">Đo đạc và tư vấn tận nhà: 0858901689</li>
+                            <li class="footer-center_item">Phản ánh thái độ phục vụ: 0858901689</li>
 
                         </ul>
                     </div>

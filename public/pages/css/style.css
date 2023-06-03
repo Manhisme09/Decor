@@ -1606,6 +1606,7 @@ a:focus {
 }
 
 .main-content .content-info-product p.price-product {
+    font-size: 20px;
     font-weight: bold;
     line-height: 20px;
     padding: 8px 0;

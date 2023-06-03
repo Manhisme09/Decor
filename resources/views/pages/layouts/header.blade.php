@@ -114,7 +114,7 @@
     </div>
     {{-- <div class="grid wide">
         <div id="top" class="header-info">
-            <p class="header-info_phone">Hotline : 0378642530</p>
+            <p class="header-info_phone">Hotline : 0858901689</p>
             <div class="header-info_about">
                 @if (Session('login'))
                     <div class="dropdown">
