@@ -106,20 +106,6 @@
             })
         }
 
-        $(document).ready(function() {
-            $('.language').click(function () {
-                $('.language-item').toggleClass('active');
-            });
-
-        });
-
-        $(document).ready(function() {
-            $('.myaccount').click(function () {
-                $('.account-item').toggleClass('active-account');
-            });
-
-        });
-
         $(function() {
             var minPrice = parseInt($("#min_price").val());
             var maxPrice = parseInt($("#max_price").val());
@@ -166,6 +152,54 @@
       return price.toLocaleString({ style: "currency", currency: "VND" });
     }
   });
+
+
+    $(document).ready(function() {
+            $('.language').click(function () {
+                $('.language-item').toggleClass('active');
+            });
+
+        });
+
+        $(document).ready(function() {
+            $('.myaccount').click(function () {
+                $('.account-item').toggleClass('active-account');
+            });
+
+        });
+
+        function displayImage(imageUrl) {
+            var mainImage = document.getElementById("main-image");
+            mainImage.src = imageUrl;
+            }
+
+            var thumbnails = document.querySelectorAll('.thumbnail');
+
+        thumbnails.forEach(function(thumbnail) {
+        thumbnail.addEventListener('click', function() {
+            // Remove 'active' class from all thumbnails
+            thumbnails.forEach(function(thumb) {
+            thumb.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked thumbnail
+            thumbnail.classList.add('active');
+        });
+        });
+
+        var mainImage = document.getElementById("main-image");
+        var modal = document.getElementById("image-modal");
+        var modalImage = document.getElementById("modal-image");
+
+        mainImage.addEventListener("click", function() {
+        modalImage.src = this.src;
+        modal.style.display = "block";
+        });
+
+        function closeModal() {
+        modal.style.display = "none";
+        }
+
     </script>
     @yield('script')
 </body>

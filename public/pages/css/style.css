@@ -106,6 +106,8 @@ span {
 
 .account-item > .account-bar > .account-icon {
     color: #ffff;
+    display: inline-block;
+    width: 100%;
 }
 
 
@@ -231,12 +233,16 @@ span {
 
 .url-main {
   text-align: center;
-  line-height: 110px;
   font-size: 20px;
 }
 
 .url-main  .url-menu {
     background-color: transparent;
+    padding-top: 52px;
+}
+
+.banner-head .url-main .nav-product {
+    padding-top: 128px;
 }
 
 .url-menu > li > a {
@@ -244,7 +250,8 @@ span {
 }
 
 .url-title {
-    margin-bottom: -81px;
+    padding-top: 40px;
+    margin-bottom: -120px;
     font-weight: bold;
 }
 
@@ -1340,6 +1347,11 @@ a:focus {
     margin: 0 12px;
     overflow: hidden;
     margin-right: 20px;
+    margin-top: 30px;
+}
+
+.sidebar-main .sidebar-content .widget-title {
+    line-height: 35px;
 }
 
 .sidebar-content #contact-menu img {
@@ -1556,13 +1568,60 @@ a:focus {
 .content-product {
     clear: both;
     min-height: 400px;
-    margin-bottom: 40px;
+    margin-bottom: 70px;
 }
 
 .main-content .content-img-product {
     float: left;
     width: 45%;
 }
+
+.main-content .content-img-product .image-list {
+    width: 100%;
+    display: flex;
+    margin: auto;
+}
+
+.main-content .content-img-product .image-list img {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+.main-content .content-img-product .image-list img.active {
+    opacity: 1;
+  }
+
+
+  .content-product .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .content-product .modal img {
+    display: block;
+    margin: 0 auto;
+    max-width: 90%;
+    max-height: 90%;
+    margin-top: 25px;
+  }
+
+  .content-product .modal .close {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+
 
 .main-content .content-img-product img {
     width: 400px;
@@ -1686,6 +1745,80 @@ a:focus {
 .contact-content > .col-sm-12 {
     border: solid 1px #ccc;
     padding: 10px;
+}
+
+.login-content .form-login {
+    margin: auto;
+    width: 40%;
+
+}
+
+.login-content .form-login .panel-heading {
+    background-color: var(--primary-color);
+    text-align: center;
+    color: white;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.container .form-register .panel-heading {
+    background-color: var(--primary-color);
+    text-align: center;
+    color: white;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.form-login .panel-body .checkbox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-login .panel-body .form-group .form-control {
+    height: 45px;
+}
+
+.form-login .panel-body .btn-my{
+    background-color: var(--primary-color);
+}
+
+.login-google {
+    margin-top: 20px;
+    margin-bottom: 90px;
+}
+
+.login-google .google-sign {
+    width: 20px;
+    margin-right: 11px;
+    margin-top: 7px;
+    height: 20px;
+}
+
+.login-google .btn-google {
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    background-color: white;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    color: black;
+    line-height: 38px;
+}
+
+.container .form-register {
+    width: 50%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.container .form-register .regis-content .form-control{
+    height: 40px;
+}
+
+.container .form-register .regis-content .btn-my {
+    background-color: var(--primary-color);
 }
 
 /* giỏ hàng */

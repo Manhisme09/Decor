@@ -71,7 +71,7 @@
                         <a href="{{ route('pages.chitietsanpham', ['id' => $top->id, 'slug' => $top->slug]) }}"
                             class="col l-3 m-4 c-6 prpduct-propose_list">
                             <div class="product-propose_new-item">
-                                <img class="product-propose_new-item_img" src="{{ asset($top->hinh_anh) }}"
+                                <img class="product-propose_new-item_img" src="{{ asset($top->image[0]->url) }}"
                                     alt="FURNIBUY">
                                 <p class="product-propose_new-item_info">{{ $top->ten_san_pham }}</p>
                                 <h4 class="product-propose_new-item_price">Giá:
@@ -104,7 +104,7 @@
                                                     <div class="thumbnail">
                                                         <a href="{{ route('pages.chitietsanpham', ['slug' => $all->slug, 'id' => $all->id]) }}">
                                                             <img class="product-propose_new-item_img"
-                                                                src="{{ asset($all->hinh_anh) }}" alt="Lights"
+                                                                src="{{ asset($all->image[0]->url) }}" alt="Lights"
                                                                 style="width:100%">
                                                             <div class="caption">
                                                                 <p class="product-propose_new-item_info">

@@ -8,7 +8,7 @@
             <div class="url-main">
                 <div class="url-title">{{ $danhMuc->ten_danh_muc }}</div>
                 <nav aria-label="breadcrumb row">
-                    <ol class="breadcrumb url-menu">
+                    <ol class="breadcrumb url-menu nav-product">
                         <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('pages.product', ['id' => $danhMuc->id]) }}">{{ $danhMuc->ten_danh_muc }}</a></li>
                     </ol>
@@ -72,7 +72,7 @@
                                                             <a
                                                                 href="{{ route('pages.chitietsanpham', ['id' => $sanpham->id, 'slug' => $sanpham->slug]) }}">
                                                                 <img class="product-propose_new-item_img"
-                                                                    src="{{ asset($sanpham->hinh_anh) }}" alt="Lights"
+                                                                    src="{{ asset($sanpham->image[0]->url) }}" alt="Lights"
                                                                     style="width:100%">
                                                                 <div class="caption">
                                                                     <p class="product-propose_new-item_info">

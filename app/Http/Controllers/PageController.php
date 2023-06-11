@@ -8,6 +8,7 @@ use App\Models\SanPham;
 use App\Models\DanhMuc;
 use App\Models\LienHe;
 use App\Models\Slide;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,8 @@ class PageController extends Controller
         $chiTiet = SanPham::find($id);
         $listDanhmuc = DanhMuc::where('parent_id', '!=', 0)->get();
         $tuongTu = SanPham::where('danh_muc_id', '=', $chiTiet->danh_muc_id)->get();
-        return view('pages.product_detail', compact('chiTiet', 'listDanhmuc', 'tuongTu', 'binhluan'));
+        $images = Image::where('product_id', $id)->get();
+        return view('pages.product_detail', compact('chiTiet', 'listDanhmuc', 'tuongTu', 'binhluan', 'images'));
     }
 
     public function gioiThieu()

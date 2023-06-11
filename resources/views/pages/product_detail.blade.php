@@ -10,7 +10,7 @@
                     <div class="url-main">
                         <div class="url-title">{{ $chiTiet->ten_san_pham }}</div>
                         <nav aria-label="breadcrumb row">
-                            <ol class="breadcrumb url-menu">
+                            <ol class="breadcrumb url-menu nav-product">
                                 <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
                                 <li class="breadcrumb-item"><a href="/san-pham/{{ $chiTiet->danh_muc->id }}">{{ $chiTiet->danh_muc->ten_danh_muc }}</a></li>
                             </ol>
@@ -23,8 +23,17 @@
                     <div class="main-content">
                         <div class="content-product">
                             <div class="content-img-product">
-                                <img src="{{ asset($chiTiet->hinh_anh) }}" alt="">
+                                <img id="main-image" src="{{ asset($images[0]->url) }}" alt="">
+                                <div class="image-list">
+                                  @foreach ( $images as $index => $image )
+                                  <img class="thumbnail {{ $index == 0 ? 'active' : '' }}" style="width: 80px; height: 80px" src="{{ asset($image->url) }}" alt="" onclick="displayImage('{{ asset($image->url) }}')">
+                                  @endforeach
+                                </div>
                             </div>
+                            <div id="image-modal" class="modal">
+                                <span class="close" onclick="closeModal()">&times;</span>
+                                <img id="modal-image" src="" alt="">
+                              </div>
                             <div class="content-info-product">
                                 <h1 class="name-product">{{ $chiTiet->ten_san_pham }}</h1>
                                 <div class="product-meta" style="padding: 0px 16px; line-height:1.6">
@@ -158,7 +167,7 @@
                                     <a href="{{ route('pages.chitietsanpham', ['slug' => $tt->slug, 'id' => $tt->id]) }}"
                                         class="col l-3 m-4 c-6 prpduct-propose_list">
                                         <div class="product-propose_new-item">
-                                            <img class="product-propose_new-item_img" src="{{ asset($tt->hinh_anh) }}"
+                                            <img class="product-propose_new-item_img" src="{{ asset($tt->image[0]->url) }}"
                                                 alt="FURNIBUY">
                                             <p class="product-propose_new-item_info">{{ $tt->ten_san_pham }}</p>
                                             <h4 class="product-propose_new-item_price">Giá:
