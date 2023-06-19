@@ -13,15 +13,34 @@
                     height: 100px" src="{{ asset('images/bannerlogo.png') }}" alt="">
                 </a>
             </div>
-            <div class="item-header">
-                <div class="multi-myaccount">
-                    <button class="myaccount">
+            <div class="multi-myaccount">
+                <button class="myaccount">
+                    @if (Auth::user())
+                        <div style="display:flex; justify-content:space-between">
+                            <div><i class="fas fa-user"></i></div>
+                            <div style="padding: 0 7px">{{ Auth::user()->khach_hang->ho_ten }}</div>
+                            <div><i class="fas fa-angle-down"></i></div>
+                        </div>
+                    @else
                         <div style="display:flex; justify-content:space-between; width:105px">
                             <div><i class="fas fa-user"></i></div>
                             <div>My account</div>
                             <div><i class="fas fa-angle-down"></i></div>
                         </div>
-                    </button>
+                    @endif
+                </button>
+                @if ( Auth::check() && Auth::user()->role === 5 )
+                        <ul class="account-item infor-account">
+                            <li class="infor-account-item"><a href="{{ route('pages.getthongtin') }}"><i class="fas fa-info-circle"></i>  <span>Thông tin
+                                tài khoản</span> </a></li>
+                            <li class="divider"></li>
+                            <li class="infor-account-item"><a href="{{ route('pages.getdonhang') }}"><i class="fas fa-file-invoice"></i> <span>Đơn hàng</span> </a></li>
+                            <li class="divider"></li>
+                            <li class="infor-account-item"><a href="{{ route('pages.getmatkhau') }}"><i class="fas fa-key"></i> <span>Đổi mật khẩu</span></a></li>
+                            <li class="divider"></li>
+                            <li class="infor-account-item"><a href="{{ route('pages.dangxuat') }}"><i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span> </a></li>
+                        </ul>
+                @else
                     <ul class="account-item">
                         <li class="account-bar">
                             <a class="account-icon" href="{{ route('pages.dangnhap') }}">
@@ -30,12 +49,13 @@
                         </li>
                         <li class="account-bar">
                             <a class="account-icon" href="{{ route('pages.dangky') }}">
-                               Đăng ký
+                            Đăng ký
                             </a>
                         </li>
                     </ul>
-                </div>
-
+                @endif
+            </div>
+            <div class="item-header">
                 <div class="multi-lang">
                     <button class="language">
                         <span class="getLang">
@@ -118,9 +138,6 @@
             <div class="header-info_about">
                 @if (Session('login'))
                     <div class="dropdown">
-                        <a href="{{ route('pages.gioithieu') }}" class="header-info_about-content btn">Giới thiệu</a>
-                    </div>
-                    <div class="dropdown">
                         <a href="{{ route('pages.getcskh') }}" class="header-info_about-content btn">CSKH</a>
                     </div>
                     <div class="dropdown">
@@ -139,9 +156,6 @@
                         </ul>
                     </div>
                 @elseif (Auth::check() && Auth::user()->role === 5)
-                    <div class="dropdown">
-                        <a href="{{ route('pages.gioithieu') }}" class="header-info_about-content btn">Giới thiệu</a>
-                    </div>
                     <div class="dropdown">
                         <a href="{{ route('pages.getcskh') }}" class="header-info_about-content btn">CSKH</a>
                     </div>
@@ -164,9 +178,6 @@
                         </ul>
                     </div>
                 @else
-                    <div class="dropdown">
-                        <a href="{{ route('pages.gioithieu') }}" class="header-info_about-content btn">Giới thiệu</a>
-                    </div>
                     <div class="dropdown">
                         <a href="{{ route('pages.getcskh') }}" class="header-info_about-content btn">CSKH</a>
                     </div>

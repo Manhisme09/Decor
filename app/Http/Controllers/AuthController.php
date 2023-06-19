@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\KhachHang;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,6 +12,9 @@ use App\Models\AccSocial;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailPassword;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\AdminLoginRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use Str;
 
 use function PHPUnit\Framework\returnSelf;
@@ -22,20 +26,15 @@ class AuthController extends Controller
         return view('admin.layouts.login');
     }
 
-    public function postAdminLogin(Request $request)
+    public function postAdminLogin(AdminLoginRequest $request)
     {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required',
-        ], [
-            'email.required' => 'Vui lòng nhập email',
-            'password.required' => 'Vui lòng nhập mật khẩu',
-        ]);
         $remember = $request->has('remember') ? true : false;
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'], $remember)) {
+            Toastr::success('Đăng nhập thành công', 'Thành công');
             return redirect()->route('admin.index');
         } else {
-            return redirect()->back()->with('thongbao', 'Tài khoản hoặc mật khẩu không hợp lệ');
+            Toastr::error('Tài khoản hoặc mật khẩu không chính xác!');
+            return redirect()->back();
         }
     }
 
@@ -50,46 +49,42 @@ class AuthController extends Controller
         return view('pages.layouts.dangky');
     }
 
-    public function userPostRegister(Request $request)
+    public function userPostRegister(RegisterRequest $request)
     {
-        $this->validate($request, [
-            'email' => 'required|unique:users,email',
-            'ho_ten' => 'required',
-            'ngay_sinh' => 'required|date|before:today',
-            'dia_chi' => 'required',
-            'dien_thoai' => 'required|numeric|min:10',
-            'password' => 'required|min:6',
-            'passwordAgain' => 'required|same:password',
-        ], [
-            'email.required' => 'Vui lòng nhập email!',
-            'email.unique' => 'Email đã tồn tại!',
-            'ho_ten.required' => 'Vui lòng nhập họ tên!',
-            'ngay_sinh.required' => 'Vui lòng nhập ngày sinh!',
-            'ngay_sinh.date' => 'Nhập ngày sinh không hợp lệ!',
-            'ngay_sinh.before' => 'Ngày sinh không được lớn hơn ngày hôm nay!',
-            'dia_chi.required' => 'Vui lòng nhập địa chỉ!',
-            'dien_thoai.required' => 'Vui lòng nhập số điện thoại!',
-            'dien_thoai.numeric' => 'Số điện thoại phải là số!',
-            'dien_thoai.min' => 'Số điện thoại phải có ít nhất 10 số!',
-            'password.required' => 'Vui lòng nhập mật khẩu!',
-            'password.min' => 'Mật khẩu ít nhất phải có 5 ký tự!',
-            'passwordAgain.required' => 'Vui lòng xác nhận mật khẩu!',
-            'passwordAgain.same' => 'Xác nhận mật khẩu không chính xác!',
-        ]);
-
         $register_token = Str::random(10);
-        $data = $request->all();
-        $password_h = bcrypt($request->password);
-        $data['password'] = $password_h;
-        $data['register_token'] = $register_token;
+        $data = [
+            'email' => $request->get('email'),
+            'ho_ten' => $request->get('ho_ten'),
+            'ngay_sinh' => $request->get('ngay_sinh'),
+            'dia_chi' => $request->get('dia_chi'),
+            'dien_thoai' => $request->get('dien_thoai'),
+            'password' => bcrypt($request->get('password')),
+            'register_token' =>  $register_token,
+            'role' =>  UserRole::User,
+        ];
 
-        if ($data > 0) {
-            User::register($data);
-            Mail::send('pages.active-account', compact('data'), function ($email) use ($data) {
-                $email->from($data['email'],'FURNIBUY')->subject('Xác nhận tài khoản');
-                $email->to($data['email'], $data['ho_ten']);
-            });
-        }
+
+        $user = new User();
+        $user->role = $data['role'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->name = $data['ho_ten'];
+        $user->register_token = $data['register_token'];
+        $user->save();
+
+        $khachHang = new KhachHang();
+        $khachHang->user_id = $user->id;
+        $khachHang->ho_ten = $data['ho_ten'];
+        $khachHang->ngay_sinh = $data['ngay_sinh'];
+        $khachHang->dia_chi = $data['dia_chi'];
+        $khachHang->dien_thoai = $data['dien_thoai'];
+        $khachHang->save();
+
+        Mail::send('pages.active-account', compact('data'), function ($email) use ($data) {
+            $email->from($data['email'],'FURNIBUY')->subject('Xác nhận tài khoản');
+            $email->to($data['email'], $data['ho_ten']);
+        });
+
         return redirect()->back()->with('thongbao', 'Chúc mừng bạn đã đăng ký thành công. Vui lòng kiểm tra email và làm theo hướng dẫn để hoàn thành việc đăng ký tài khoản của bạn.');
     }
 

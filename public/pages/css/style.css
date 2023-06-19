@@ -19,10 +19,35 @@
 
 .item-header {
     display: flex;
-    width: 266px;
+    width: 135px;
     justify-content: space-between;
     padding-top: 57px;
 }
+
+.multi-myaccount {
+    position: relative;
+  }
+
+  .multi-myaccount .myaccount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto; /* Đặt chiều rộng tự động theo nội dung */
+  }
+
+  .multi-myaccount .myaccount > div:first-child,
+  .multi-myaccount .myaccount > div:last-child {
+    flex-shrink: 0;
+  }
+
+  .multi-myaccount .myaccount > div:nth-child(2) {
+    flex-grow: 1;
+    margin: 0 5px;
+  }
+
+  .multi-myaccount .myaccount > div:last-child {
+    margin-left: 5px;
+  }
 
 .language {
   border: none;
@@ -52,6 +77,7 @@ span {
   top: 90px;
   z-index: 999;
   display: none;
+  border-radius: 4px;
 }
 
 .active {
@@ -69,7 +95,6 @@ span {
 
 .header-logo-image {
   line-height: 120px;
-  padding-left: 150px;
 }
 
 .myaccount {
@@ -81,11 +106,48 @@ span {
     position: absolute;
     background-color: #fff;
     box-shadow: 3px 3px 3px 3px #4e4d4d;
-    right: 240px;
+    right: 0;
     width: 240px;
-    top: 90px;
+    top: 89px;
     z-index: 999;
     display: none;
+}
+
+.infor-account {
+    list-style: none;
+    width: 220px;
+    border-radius: 4px;
+}
+
+.infor-account  .infor-account-item {
+   padding: 7px 30px;
+}
+
+.infor-account .divider {
+    height: 1px;
+    margin: 3px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.infor-account > li > a {
+    color: black;
+    text-transform: none;
+    font-weight: 300;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.infor-account > li > a > i{
+    width: 14px;
+    height: 14px;
+    padding-right: 18px;
+}
+
+.infor-account > .infor-account-item > a:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
 }
 
 .account-bar {
@@ -1524,6 +1586,12 @@ a:focus {
     box-shadow: 3px 4px 2px rgb(0 0 0 / 10%), 0px 0px 2px rgb(0 0 0 / 20%);
 }
 
+.header .multi-myaccount {
+    padding-top: 57px;
+    position: absolute;
+    right: 235px;
+}
+
 .nav-item:hover .list-product {
     display: block;
   }
@@ -1819,6 +1887,10 @@ a:focus {
 }
 
 .container .form-register .regis-content .btn-my {
+    background-color: var(--primary-color);
+}
+
+.panel-body .btn-my {
     background-color: var(--primary-color);
 }
 

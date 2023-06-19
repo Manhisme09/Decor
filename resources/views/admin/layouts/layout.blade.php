@@ -19,6 +19,7 @@
     <link href="{{ asset('front-end/admin/css/startmin.css') }}" rel="stylesheet">
     <link href="{{ asset('front-end/admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('front-end/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('front-end/admin/css/toastrmin.css') }}">
 
 </head>
 
@@ -131,7 +132,8 @@
     <script src="{{ asset('front-end/admin/js/startmin.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
-
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
     <script>
         $(document).ready(function() {
             $('#table-admin').DataTable({

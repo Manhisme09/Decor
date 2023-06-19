@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BinhLuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Brian2694\Toastr\Facades\Toastr;
 
 class BinhLuanController extends Controller
 {
@@ -17,7 +18,8 @@ class BinhLuanController extends Controller
     public function deleteComment($id)
     {
         BinhLuan::destroy($id);
-        return redirect()->back()->with('thongbao', 'Đã xoá bình luận');
+        Toastr::success('Xóa bình luận thành công!', 'Thành công');
+        return redirect()->back();
     }
 
     public function getRelyComment($id)
@@ -41,6 +43,7 @@ class BinhLuanController extends Controller
         $comment->status = 1;
         $comment->noi_dung = $request->noi_dung;
         $comment->save();
-        return redirect()->route('admin.binhluan.index')->with('thongbao', 'Gửi phản hồi thành công');
+        Toastr::success('Gửi bình luận thành công!', 'Thành công');
+        return redirect()->route('admin.binhluan.index');
     }
 }

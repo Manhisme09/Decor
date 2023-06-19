@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\SanPham;
 use App\Models\Image;
 use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class SanPhamController extends Controller
 {
@@ -71,8 +72,8 @@ class SanPhamController extends Controller
                 $image->save();
             }
         }
-
-        return redirect()->back()->with('thongbao', 'Thêm thành công');
+        Toastr::success('Thêm sản phẩm thành công.', 'Thành công');
+        return redirect()->route('admin.SanPham.index');
     }
 
 
@@ -139,7 +140,8 @@ class SanPhamController extends Controller
             }
         }
         $sanpham->save();
-        return redirect()->route('admin.SanPham.index')->with('thongbao', 'Sửa thành công!');
+        Toastr::success('Dữ liệu đã được lưu thành công.', 'Thành công');
+        return redirect()->route('admin.SanPham.index');
     }
 
     public function getXoa($id)
@@ -156,9 +158,11 @@ class SanPhamController extends Controller
                 $image->delete();
             }
             $sanpham->delete();
-            return redirect()->back()->with('thongbao', 'Xoá thành công');
+            Toastr::success('Xóa sản phẩm thành công.', 'Thành công');
+            return redirect()->back();
         } else {
-            return redirect()->back()->with('loi', 'Sản phẩm này đang tồn tại trong hoá đơn. Không thể xoá');
+            Toastr::error('Sản phẩm này đang tồn tại trong hoá đơn. Không thể xoá!');
+            return redirect()->back();
         }
     }
 }

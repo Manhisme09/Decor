@@ -17,6 +17,7 @@
     <link rel="stylesheet" href={{ asset('./pages/css/style.css') }}>
     <link rel="stylesheet" href={{ asset('./pages/css/base.css') }}>
     <link rel="stylesheet" href={{ asset('./pages/css/responsive.css') }}>
+    <link rel="stylesheet" href="{{ asset('front-end/admin/css/toastrmin.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/siiimple-toast/dist/style.css" rel="stylesheet">
     @yield('title')
 </head>
@@ -201,6 +202,8 @@
         }
 
     </script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
     @yield('script')
 </body>
 

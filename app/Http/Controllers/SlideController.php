@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class SlideController extends Controller
 {
@@ -39,7 +40,8 @@ class SlideController extends Controller
             $slide->image = "images/slide/" . $hinh;
         }
         $slide->save();
-        return redirect()->back()->with('thongbao', 'Đã thêm mới slide');
+        Toastr::success('Thêm mới slide thành công.', 'Thành công');
+        return redirect()->back();
     }
 
     public function xoa($id)
@@ -50,6 +52,7 @@ class SlideController extends Controller
             unlink($destinationPath);
         }
         $slide->delete();
-        return redirect()->back()->with('thongbao', 'Đã xoá slide');
+        Toastr::success('Xóa slide thành công.', 'Thành công');
+        return redirect()->back();
     }
 }

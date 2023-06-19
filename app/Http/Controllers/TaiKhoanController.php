@@ -10,38 +10,26 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Requests\UpdateProfileUserRequest;
+use App\Http\Requests\UpdatePasswordUserRequest;
 
 class TaiKhoanController extends Controller
 {
     public function getUserProfile()
     {
-        // $khachHang = KhachHang::find(Session('id'));
         return view('pages.taikhoan.thongtin');
     }
-    public function postUserProfile(Request $request)
+    public function postUserProfile(UpdateProfileUserRequest $request)
     {
-        $this->validate($request, [
-            'ho_ten' => 'required',
-            'dien_thoai' => 'required|numeric|min:10',
-            'ngay_sinh' => 'required|date|before:today',
-            'dia_chi' => 'required',
-        ], [
-            'ho_ten.required' => 'Vui lòng nhập họ tên',
-            'dien_thoai.required' => 'Vui lòng nhập số điện thoại',
-            'dien_thoai.numeric' => 'Nhập số điện thoại không hợp lệ',
-            'dien_thoai.min' => 'Số điện thoại phải có ít nhất 10 số',
-            'ngay_sinh.required' => 'Vui lòng nhập ngày sinh',
-            'ngay_sinh.date' => 'Nhập ngày sinh không hợp lệ',
-            'ngay_sinh.before' => 'Ngày sinh không được lớn hơn ngày hôm nay',
-            'dia_chi.required' => 'Vui lòng nhập địa chỉ',
-        ]);
         $khachHang = KhachHang::find(Auth::user()->khach_hang->id);
         $khachHang->ho_ten = $request->ho_ten;
         $khachHang->dien_thoai = $request->dien_thoai;
         $khachHang->ngay_sinh = $request->ngay_sinh;
         $khachHang->dia_chi = $request->dia_chi;
         $khachHang->update();
-        return redirect()->back()->with('thongbao', 'Thông tin đã được thay đổi');
+        Toastr::success('Cập nhập thông tin thành công', 'Thành công');
+        return redirect()->back();
     }
 
     // public function postUserProfileGoogle(Request $request){
@@ -58,28 +46,17 @@ class TaiKhoanController extends Controller
     {
         return view('pages.taikhoan.matkhau');
     }
-    public function postUserPassword(Request $request)
+    public function postUserPassword(UpdatePasswordUserRequest $request)
     {
-        $this->validate($request, [
-            'oldPassword' => 'required',
-            'password' => 'required|min:6',
-            'confirmPassword' => 'required|same:password',
-        ], [
-            'oldPassword.required' => 'Bạn chưa nhập mật khẩu cũ!',
-            'password.required' => 'Mật khẩu không được để trống!',
-            'password.min' => 'Mật khẩu phải có ít nhất 6 kí tự!',
-            'confirmPassword.required' => 'Xác nhận mật khẩu không được để trống!',
-            'confirmPassword.same' => 'Xác nhận mật khẩu không chính xác!',
-        ]);
         $user = Auth::user();
         if (!(Hash::check($request->oldPassword, $user->password))) {
-            return redirect()->back()->with('loi', 'Mật khẩu cũ không chính xác');
-        } elseif (strcmp($request->oldPassword, $request->password) === 0) {
-            return redirect()->back()->with('loi', 'Mật khẩu mới trùng mật khẩu cũ');
+            Toastr::error('Mật khẩu cũ không chính xác!');
+            return redirect()->back();
         }
         $user->password = bcrypt($request->password);
         $user->update();
-        return redirect()->back()->with('thongbao', 'Thay đổi mật khẩu thành công');
+        Toastr::success('Thay đổi mật khẩu thành công!', 'Thành công');
+        return redirect()->back();
     }
     public function getUserOrder()
     {
