@@ -36,7 +36,7 @@ use Whoops\RunInterface;
 Route::get('/', [PageController::class, 'index'])->name('TrangChu');
 Route::get('dang-ky', [AuthController::class, 'userRegister'])->name('pages.dangky');
 Route::post('dang-ky', [AuthController::class, 'userPostRegister'])->name('pages.postdangky');
-Route::get('xac-nhan-tai-khoan/{mail_user}/{token}', [AuthController::class, 'verifyRegisterMail'])->name('verify-register-mail');
+Route::get('xac-nhan-tai-khoan/{token}', [AuthController::class, 'verifyRegisterMail'])->name('verify-register-mail');
 Route::get('dang-nhap', [AuthController::class, 'userLogin'])->name('pages.dangnhap');
 Route::post('dang-nhap', [AuthController::class, 'postUserLogin'])->name('pages.postdangnhap');
 Route::get('dang-xuat', [AuthController::class, 'userLogout'])->name('pages.dangxuat');

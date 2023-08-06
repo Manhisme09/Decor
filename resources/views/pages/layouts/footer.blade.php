@@ -15,7 +15,7 @@
                         <h3 class="footer-center_title">VỀ CÔNG TY</h3>
                         <div class="footer-center_line"></div>
                         <p class="footer-center_text">Địa chỉ 1: Số 205 Nguyễn Xiển, Hà Nội (mặt đường vành đai 3)</p>
-                        <p class="footer-center_text">Hotline+Zalo : 0931.266.466</p>
+                        <p class="footer-center_text">Hotline+Zalo : 0858.901.689</p>
                     </div>
                 </div>
 

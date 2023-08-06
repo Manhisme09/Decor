@@ -116,7 +116,7 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn-my btn pull-right">Lưu</button>
+                                    <button style="width: 80px" type="submit" class="btn-my pull-right">Lưu</button>
                                 </form>
                             </div>
                         </div>

@@ -30,7 +30,7 @@
                                 <div>
                                     @if (count($errors) > 0)
                                         <div class="alert alert-danger">
-                                            {{ 'Bạn vui lòng nhập đầy đủ các thông tin theo yêu cầu !' }}
+                                            {{ 'Có lỗi xảy ra. Vui lòng thử lại !' }}
                                         </div>
                                     @endif
                                     @if (session('thongbao'))
@@ -104,7 +104,7 @@
                                                 style="color: red">*</span>) không được để trống!</small>
                                     </div>
                                     <div class="form-block">
-                                        <button type="submit" class="btn pull-right btn-my">Đăng ký</button>
+                                        <button type="submit" class="pull-right btn-my">Đăng ký</button>
                                     </div>
                             </div>
                         </form>

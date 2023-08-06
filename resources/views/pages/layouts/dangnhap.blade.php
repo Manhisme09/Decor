@@ -67,7 +67,7 @@
                                             </div>
 
                                             <!-- Change this to a button or input when using this as a form -->
-                                            <input type="submit" class="btn btn-lg btn-block btn-my" value="Đăng nhập">
+                                            <input type="submit" class="btn-lg btn-block btn-my" value="Đăng nhập">
                                             {{-- <a href="{{ route('pages.dangnhapgg') }}"
                                                 class="btn-lg btn-primary btn-block hover btn-my"> Đăng nhập bằng google</a> --}}
 

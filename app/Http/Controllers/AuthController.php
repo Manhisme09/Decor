@@ -15,6 +15,7 @@ use App\Mail\SendMailPassword;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\AdminLoginRequest;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Carbon;
 use Str;
 
 use function PHPUnit\Framework\returnSelf;
@@ -51,53 +52,69 @@ class AuthController extends Controller
 
     public function userPostRegister(RegisterRequest $request)
     {
-        $register_token = Str::random(10);
-        $data = [
-            'email' => $request->get('email'),
-            'ho_ten' => $request->get('ho_ten'),
-            'ngay_sinh' => $request->get('ngay_sinh'),
-            'dia_chi' => $request->get('dia_chi'),
-            'dien_thoai' => $request->get('dien_thoai'),
-            'password' => bcrypt($request->get('password')),
-            'register_token' =>  $register_token,
-            'role' =>  UserRole::User,
-        ];
+        $user = User::query()->where('email', $request->email)->first();
+        $timeNow = Carbon::now();
+        // $timeNow = Carbon::parse('2023-07-15 10:30:00');
+        $register_token = base64_encode($request->email . config('services.split_token') . $timeNow);
 
+        if ($user && $user->getAttribute('register_token')){
+            list($email, $time) = explode(config('services.split_token'), base64_decode($user->getAttribute('register_token')));
+            $timeNextTwoDays = Carbon::parse($time)->addDays(config('services.verification_time'));
+            if ($timeNextTwoDays->lte($timeNow)) {
+                $user->register_token = $register_token;
+                $user->save();
+                $this->sendEmailRegister($user);
+                return redirect()->route('pages.dangnhap');
+            }
 
-        $user = new User();
-        $user->role = $data['role'];
-        $user->email = $data['email'];
-        $user->password = $data['password'];
-        $user->name = $data['ho_ten'];
-        $user->register_token = $data['register_token'];
-        $user->save();
+            $this->sendEmailRegister($user);
 
-        $khachHang = new KhachHang();
-        $khachHang->user_id = $user->id;
-        $khachHang->ho_ten = $data['ho_ten'];
-        $khachHang->ngay_sinh = $data['ngay_sinh'];
-        $khachHang->dia_chi = $data['dia_chi'];
-        $khachHang->dien_thoai = $data['dien_thoai'];
-        $khachHang->save();
+        } else {
 
-        Mail::send('pages.active-account', compact('data'), function ($email) use ($data) {
-            $email->from($data['email'],'FURNIBUY')->subject('Xác nhận tài khoản');
-            $email->to($data['email'], $data['ho_ten']);
-        });
+            $user = new User();
+            $user->role = UserRole::User;
+            $user->email =  $request->get('email');
+            $user->password = bcrypt($request->get('password'));
+            $user->name = $request->get('ho_ten');
+            $user->register_token = $register_token;
+            $user->save();
 
-        return redirect()->back()->with('thongbao', 'Chúc mừng bạn đã đăng ký thành công. Vui lòng kiểm tra email và làm theo hướng dẫn để hoàn thành việc đăng ký tài khoản của bạn.');
+            $khachHang = new KhachHang();
+            $khachHang->user_id = $user->id;
+            $khachHang->ho_ten = $request->get('ho_ten');
+            $khachHang->ngay_sinh = $request->get('ngay_sinh');
+            $khachHang->dia_chi = $request->get('dia_chi');
+            $khachHang->dien_thoai = $request->get('dien_thoai');
+            $khachHang->save();
+
+            $this->sendEmailRegister($user);
+        }
+        return redirect()->route('pages.dangnhap');
     }
 
-    public function verifyRegisterMail($mail_user, $token)
+    public function sendEmailRegister($user)
     {
-        $account = User::where('email', $mail_user)->first();
-        if ($account->register_token === $token) {
-            $account->status = 'active';
-            $account->update();
-            return redirect()->route('pages.dangnhap')->with('thongbao', 'Xác nhận tài khoản thành công, bạn có thể đăng nhập vào hệ thống');
-        } else {
-            return redirect()->route('pages.dangnhap')->with('loi', 'Mã xác nhận không hợp lệ');
+        Mail::send('pages.active-account', compact('user'), function ($email) use ($user) {
+            $email->from(config('services.email_root'),'MANH HOUSE')->subject('Xác nhận tài khoản');
+            $email->to($user['email'], $user['name']);
+        });
+        Toastr::success('Chúc mừng bạn đã đăng ký thành công. Vui lòng kiểm tra email và làm theo hướng dẫn để hoàn thành việc đăng ký tài khoản của bạn !', 'Thành công');
+    }
+
+    public function verifyRegisterMail($token)
+    {
+        list($email, $time) = explode(config('services.split_token'), base64_decode($token));
+        $account = User::where('email', $email)->where('status', 'deactive')->first();
+        $timeNextTwoDays = Carbon::parse($time)->addDays(config('services.verification_time'));
+        $isNotExpired = $timeNextTwoDays->gt(Carbon::now());
+        if (!$isNotExpired) {
+            Toastr::error('Liên kết đã hết hạn. Vui lòng đăng ký lại.');
+            return redirect()->route('pages.dangky');
         }
+        $account->status = 'active';
+        $account->update();
+        Toastr::success('Xác nhận tài khoản thành công, bạn có thể đăng nhập vào hệ thống !', 'Thành công');
+        return redirect()->route('pages.dangnhap');
     }
 
     public function userLogin()
@@ -116,6 +133,7 @@ class AuthController extends Controller
         ]);
         $remember = $request->has('remember') ? true : false;
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 'active'], $remember)) {
+            Toastr::success('Đăng nhập thành công!', 'Thành công');
             return redirect()->route('TrangChu');
         } else {
             return redirect()->back()->with('loi', 'Tài khoản hoặc mật khẩu không chính xác!');
@@ -137,30 +155,15 @@ class AuthController extends Controller
     public function callback_google()
     {
         $users = Socialite::driver('google')->stateless()->user();
-        // return $users->name;
         $authUser = $this->findOrCreateUser($users, 'google');
         if ($authUser) {
             $account_name = User::with('khach_hang')->where('id', $authUser->user_id)->first();
-            // dd($account_name->email);
-            Session::put('user_login', $account_name->khach_hang->ho_ten);
-            Session::put('phone', $account_name->khach_hang->dien_thoai);
-            Session::put('email', $account_name->email);
-            Session::put('address', $account_name->khach_hang->dia_chi);
-            Session::put('date', $account_name->khach_hang->ngay_sinh);
-            Session::put('login', true);
-            Session::put('id', $account_name->id);
-        } elseif ($customer_new) {
-            $account_name = User::with('khach_hang')->where('id', $authUser->user_id)->first();
-            // dd($account_name->email);
-            Session::put('user_login', $account_name->khach_hang->ho_ten);
-            Session::put('phone', $account_name->khach_hang->dien_thoai);
-            Session::put('email', $account_name->email);
-            Session::put('address', $account_name->khach_hang->dia_chi);
-            Session::put('date', $account_name->khach_hang->ngay_sinh);
-            Session::put('login', true);
-            Session::put('id', $account_name->id);
+            auth()->login($account_name, true);
+            Toastr::success('Đăng nhập thành công!', 'Thành công');
+            return redirect()->route('TrangChu');
+        } else {
+            return redirect()->back();
         }
-        return redirect()->route('TrangChu')->with('message', 'Đăng nhập Admin thành công');
     }
 
     public function findOrCreateUser($users, $provider)
@@ -173,40 +176,29 @@ class AuthController extends Controller
                 'provider_user_id' => $users->id,
                 'provider' => strtoupper($provider)
             ]);
-
             $orang = User::where('email', $users->email)->first();
-
             if (!$orang) {
                 $orang = User::create([
                     'name' => $users->name,
                     'email' => $users->email,
-                    'admin_password' => '',
                     'role' => '5',
                     'status' => 'active',
                 ]);
-                $khach_hang = KhachHang::create([
+                KhachHang::create([
                     'user_id' => $orang->id,
                     'ho_ten' => $users->name,
-                    'dia_chi' => ' ',
-                    'dien_thoai' => ' ',
                 ]);
             }
-            $customer_new->users()->associate($orang, $khach_hang);
+            $customer_new->users()->associate($orang);
             $customer_new->save();
             return $customer_new;
         }
-
-        // $account_name = User::where('id', $hieu->user_id)->first();
-        // Session::put('user_login', $account_name->name);
-        // Session::put('id', $account_name->id);
-        // return redirect()->route('TrangChu')->with('message', 'Đăng nhập Admin thành công');
-
     }
 
     public function sendMail(Request $request)
     {
         $data = $request->all();
-        $title = 'Lấy lại mật khẩu';
+        $title = 'Đặt lại mật khẩu';
         $customer = User::where('email', $data['email'])->where('role', 5)->get();
         foreach ($customer as $item) {
             $customer_id = $item->id;
@@ -221,19 +213,19 @@ class AuthController extends Controller
                 $customer->customer_token = $token_random;
                 $customer->save();
 
-                $to_email = $data['email'];
-                $linkReset = url('/update-new-pass?email=' . $to_email . '&token=' . $token_random);
+                $linkReset = url('/update-new-pass?token=' . $token_random);
                 $data = array("name" => $title, "body" => $linkReset, 'email_account' => $data['email']);
                 Mail::send('pages.sendMail', ['data' => $data], function ($message) use ($title, $data) {
-                    $message->from($data['email_account'], 'FURNIBUY')->subject($title);
+                    $message->from($data['email_account'], 'MANH HOUSE')->subject($title);
                     $message->to($data['email_account'], $title);
                 });
 
-                return redirect()->back()->with('message', 'Gửi mail thành công. Vui lòng vào mail để đặt lại mật khẩu');
+                Toastr::success('Gửi mail thành công. Vui lòng vào mail để đặt lại mật khẩu !', 'Thành công');
+                return redirect()->back();
             }
         }
 
-        Mail::to($to_email)->send(new SendMailPassword);
+        // Mail::to($to_email)->send(new SendMailPassword);
 
         return redirect()->route('pages.dangnhap');
     }
@@ -258,7 +250,7 @@ class AuthController extends Controller
         ]);
         $data = $request->all();
         $token_random = Str::random();
-        $customer = User::where('email', $data['email'])->where('customer_token', $data['token'])->get();
+        $customer = User::where('customer_token', $data['token'])->get();
         $count = $customer->count();
         if ($count > 0) {
             foreach ($customer as $item) {

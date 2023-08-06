@@ -35,7 +35,7 @@
                     @endif
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form action="" method="POST">
+                            <form class="form-change-password" action="" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="oldPassword">Mật khẩu cũ <span style="color: red">*</span></label>
@@ -60,7 +60,7 @@
                                         <p style="color: red">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-my">Lưu</button>
+                                <button type="submit" class="btn-my">Lưu</button>
                             </form>
                         </div>
                     </div>

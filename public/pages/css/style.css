@@ -1849,6 +1849,10 @@ a:focus {
 
 .form-login .panel-body .btn-my{
     background-color: var(--primary-color);
+    border: none;
+    color: white;
+    height: 40px;
+    border-radius: 10px;
 }
 
 .login-google {
@@ -1888,10 +1892,28 @@ a:focus {
 
 .container .form-register .regis-content .btn-my {
     background-color: var(--primary-color);
+    border: none;
+    color: white;
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
 }
 
 .panel-body .btn-my {
     background-color: var(--primary-color);
+    border: none;
+    color: white;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.panel-body .form-change-password .btn-my {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
 }
 
 /* giỏ hàng */

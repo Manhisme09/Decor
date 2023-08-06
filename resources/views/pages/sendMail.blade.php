@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <p>Bạn vui lòng click vào đường link: {{ $data['body'] }} để đặt lại mật khẩu</p>
+    <p>Bạn vui lòng click vào đường link để đặt lại mật khẩu: </p>
+    <a href="{{ $data['body'] }}">{{ $data['body'] }}</a>
 </body>
 
 </html>

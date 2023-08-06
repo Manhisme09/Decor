@@ -1,6 +1,6 @@
 @extends('pages.layouts.layout')
 @section('title')
-    <title>Funibuy - Nội thất đẹp, giá rẻ</title>
+    <title>Shop bán Đồ decor & Đồ trang trí nhà đẹp, giá rẻ</title>
 @endsection
 @section('content')
 

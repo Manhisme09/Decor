@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                'unique:users',
+                'unique:users,email,' . $this->id . ',id,status,active',
             ],
             'ho_ten' => [
                 'required',

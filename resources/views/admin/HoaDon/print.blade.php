@@ -46,7 +46,7 @@
     <div class="header">
         <h2>CỬA HÀNG NỘI THẤT FURNIBUY.COM</h2>
         <p>Đ/C: Số 211 Vũ Tông Phan – Thanh Xuân – Hà Nội</p>
-        <p>ĐT: 0931.266.466 - 094.121.2323</p>
+        <p>ĐT: 0858.901.689</p>
         <h2>HOÁ ĐƠN BÁN HÀNG</h2>
     </div>
 
