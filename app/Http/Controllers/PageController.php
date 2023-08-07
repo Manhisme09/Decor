@@ -17,10 +17,30 @@ class PageController extends Controller
     public function index()
     {
         $topProduct = SanPham::where('da_ban', '>', 10)->get();
-        $allProduct = SanPham::paginate(12,['*'],'pag');
+        $allProduct = SanPham::paginate(8 ,['*'],'pag');
         $slide = Slide::all();
         $posts = BaiViet::where('trang_thai', 1)->paginate(3);
         return view('pages.index', compact('topProduct', 'allProduct', 'posts', 'slide'));
+    }
+
+    public function loadMoreProducts(Request $request)
+    {
+        $offset = $request->input('offset', 0);
+        $limit = 8; // Số lượng sản phẩm cần tải thêm
+
+        $products = SanPham::offset($offset)->limit($limit)->get();
+
+        $productData = [];
+        foreach ($products as $product) {
+            $productData[] = [
+                'name' => $product->ten_san_pham,
+                'price' => number_format($product->gia_ban) . ' VNĐ',
+                'image' => asset($product->image[0]->url),
+                'link' => route('pages.chitietsanpham', ['slug' => $product->slug, 'id' => $product->id]),
+            ];
+        }
+
+        return response()->json($productData);
     }
 
     public function getProduct($id)

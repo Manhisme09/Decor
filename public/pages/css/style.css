@@ -986,6 +986,28 @@ a:focus {
     border-bottom: 1px solid #eaeaea;
 }
 
+.product-content .paginate {
+    text-align: center;
+}
+
+.product-content .paginate #load-more {
+    color: #aaa;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.product-content .paginate #icon-load-more{
+    font-size: 17px;
+    margin-right:10px;
+    color: #aaa;
+}
+
+#load-more-container:hover #load-more,
+#load-more-container:hover #icon-load-more {
+    color: var(--primary-color);
+}
+
 .product-content_list {
     list-style: none;
     margin-top: 24px;

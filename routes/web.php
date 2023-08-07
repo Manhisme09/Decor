@@ -34,6 +34,7 @@ use Whoops\RunInterface;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('TrangChu');
+Route::get('/load-more-products', [PageController::class, 'loadMoreProducts'])->name('loadMoreProducts');
 Route::get('dang-ky', [AuthController::class, 'userRegister'])->name('pages.dangky');
 Route::post('dang-ky', [AuthController::class, 'userPostRegister'])->name('pages.postdangky');
 Route::get('xac-nhan-tai-khoan/{token}', [AuthController::class, 'verifyRegisterMail'])->name('verify-register-mail');

@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col l-12 m-10 c-12">
                                 <div id="product1" class="product-content_about product-propose_new active">
-                                    <div class="row">
+                                    <div class="row" id="product-list">
                                         @if (isset($allProduct))
                                             @foreach ($allProduct as $all)
                                                 <div class="col-md-3" style="margin: 30px 0px">
@@ -119,7 +119,10 @@
 
                                         @endif
                                     </div>
-                                    <div class="paginate" style="margin-left: 550px">{{ $allProduct->links() }}</div>
+                                    <div class="paginate" id="load-more-container">
+                                        <span id="icon-load-more"><i class="fas fa-sync-alt"></i></span>
+                                        <span id="load-more">Xem thêm...</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

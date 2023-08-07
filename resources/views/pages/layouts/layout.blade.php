@@ -52,6 +52,53 @@
     </script> --}}
 
     <script>
+        $(document).ready(function() {
+            var offset = 8; // Số lượng sản phẩm đã hiển thị ban đầu
+            var limit = 8; // Số lượng sản phẩm tối đa cho mỗi lần tải thêm
+            var loadMoreButton = $('#load-more');
+            var loadMoreIcon = $('#icon-load-more');
+
+            $('#load-more').click(function() {
+                $.ajax({
+                    url: '/load-more-products',
+                    type: 'GET',
+                    data: { offset: offset },
+                    success: function(response) {
+                        if (response.length > 0) {
+                            var productContainer = $('#product-list');
+
+                            $.each(response, function(index, product) {
+                                var productHtml = '<div class="col-md-3" style="margin: 30px 0px">' +
+                                    '<div class="thumbnail">' +
+                                    '<a href="' + product.link + '">' +
+                                    '<img class="product-propose_new-item_img" src="' + product.image + '" alt="Lights" style="width:100%">' +
+                                    '<div class="caption">' +
+                                    '<p class="product-propose_new-item_info">' + product.name + '</p>' +
+                                    '<h4 class="product-propose_new-item_price">Giá: ' + product.price + ' VNĐ</h4>' +
+                                    '</div></a></div></div>';
+
+                                productContainer.append(productHtml);
+                            });
+
+                            offset += limit;
+                        } else {
+                            $('#load-more').text('Tất cả sản phẩm đã được tải');
+                            loadMoreButton.css({
+                                'cursor': 'auto',
+                                'color': 'gray',
+                            });
+                            loadMoreIcon.css({
+                                'cursor': 'auto',
+                                'color': 'gray',
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
         $(document).ready(function($) {
             $(window).scroll(function() {
                 if ($(this).scrollTop()) {
