@@ -19,6 +19,8 @@
                             <li data-target="#myCarousel" data-slide-to="4"></li>
                             <li data-target="#myCarousel" data-slide-to="5"></li>
                             <li data-target="#myCarousel" data-slide-to="6"></li>
+                            <li data-target="#myCarousel" data-slide-to="7"></li>
+
                         </ol>
 
                         <!-- Wrapper for slides -->
@@ -63,21 +65,22 @@
                         <div class="line"></div>
                     </div>
             <div class="product-propose_new active">
-                <div class="product-propose_btn product-propose_prev"><i class="fas fa-angle-left"></i></div>
-                <div class="product-propose_btn product-propose_next"><i class="fas fa-angle-right"></i></div>
-                <div class="row row-nowrap">
+                <div class="slick-slider">
                     @if (isset($topProduct))
                     @foreach ($topProduct as $top)
-                        <a href="{{ route('pages.chitietsanpham', ['id' => $top->id, 'slug' => $top->slug]) }}"
-                            class="col l-3 m-4 c-6 prpduct-propose_list">
+                    <div>
                             <div class="product-propose_new-item">
+                                <a href="{{ route('pages.chitietsanpham', ['id' => $top->id, 'slug' => $top->slug]) }}">
                                 <img class="product-propose_new-item_img" src="{{ asset($top->image[0]->url) }}"
                                     alt="FURNIBUY">
-                                <p class="product-propose_new-item_info">{{ $top->ten_san_pham }}</p>
-                                <h4 class="product-propose_new-item_price">Giá:
-                                    {{ number_format($top->gia_ban) }} VNĐ</h4>
+                                <div class="product-top">
+                                    <p class="product-propose_new-item_info">{{ $top->ten_san_pham }}</p>
+                                    <h4 class="product-propose_new-item_price">Giá:
+                                        {{ number_format($top->gia_ban) }} VNĐ</h4>
+                                </div>
+                                </a>
                             </div>
-                        </a>
+                    </div>
                     @endforeach
                     @endif
                 </div>

@@ -17,7 +17,7 @@ class PageController extends Controller
     public function index()
     {
         $topProduct = SanPham::where('da_ban', '>', 10)->get();
-        $allProduct = SanPham::paginate(8 ,['*'],'pag');
+        $allProduct = SanPham::orderBy('created_at', 'desc')->paginate(8, ['*'], 'pag');
         $slide = Slide::all();
         $posts = BaiViet::where('trang_thai', 1)->paginate(3);
         return view('pages.index', compact('topProduct', 'allProduct', 'posts', 'slide'));
@@ -28,7 +28,7 @@ class PageController extends Controller
         $offset = $request->input('offset', 0);
         $limit = 8; // Số lượng sản phẩm cần tải thêm
 
-        $products = SanPham::offset($offset)->limit($limit)->get();
+        $products = SanPham::orderBy('created_at', 'desc')->offset($offset)->limit($limit)->get();
 
         $productData = [];
         foreach ($products as $product) {

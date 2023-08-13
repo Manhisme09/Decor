@@ -19,6 +19,7 @@
     <link rel="stylesheet" href={{ asset('./pages/css/responsive.css') }}>
     <link rel="stylesheet" href="{{ asset('front-end/admin/css/toastrmin.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/siiimple-toast/dist/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
     @yield('title')
 </head>
 
@@ -52,6 +53,20 @@
     </script> --}}
 
     <script>
+        $(document).ready(function(){
+            $('.slick-slider').slick({
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 2,
+                prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+                nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+                autoplay: false,
+                autoplaySpeed: 2000,
+            });
+        });
+    </script>
+
+    <script>
         $(document).ready(function() {
             var offset = 8; // Số lượng sản phẩm đã hiển thị ban đầu
             var limit = 8; // Số lượng sản phẩm tối đa cho mỗi lần tải thêm
@@ -74,7 +89,7 @@
                                     '<img class="product-propose_new-item_img" src="' + product.image + '" alt="Lights" style="width:100%">' +
                                     '<div class="caption">' +
                                     '<p class="product-propose_new-item_info">' + product.name + '</p>' +
-                                    '<h4 class="product-propose_new-item_price">Giá: ' + product.price + ' VNĐ</h4>' +
+                                    '<h4 class="product-propose_new-item_price">Giá: ' + product.price + '</h4>' +
                                     '</div></a></div></div>';
 
                                 productContainer.append(productHtml);
@@ -250,6 +265,7 @@
 
     </script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     {!! Toastr::message() !!}
     @yield('script')
 </body>

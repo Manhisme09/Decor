@@ -103,6 +103,7 @@ span {
 }
 
 .account-item {
+    border-radius: 5px;
     position: absolute;
     background-color: #fff;
     box-shadow: 3px 3px 3px 3px #4e4d4d;
@@ -772,7 +773,7 @@ a:focus {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 0;
+    width: 20%;
     transition: all 0.5s ease;
 }
 /* produce-neww ...................................*/
@@ -824,9 +825,62 @@ a:focus {
     transition: all ease-out 0.5s;
 }
 
+.slick-slider a:focus {
+    outline: none;
+}
+
+.slick-next {
+    font-size: 24px;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
+    color: #000; /* Màu sắc của icon */
+    background-color: #fff; /* Màu nền của nút */
+    border: 1px solid #ccc; /* Viền của nút */
+    border-radius: 50%; /* Bo tròn viền để tạo hình tròn */
+    padding: 8px; /* Khoảng cách từ icon đến viền nút */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    color: var(--primary-color);
+}
+
+.slick-prev {
+    font-size: 24px;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
+    color: #000; /* Màu sắc của icon */
+    background-color: #fff; /* Màu nền của nút */
+    border: 1px solid #ccc; /* Viền của nút */
+    border-radius: 50%; /* Bo tròn viền để tạo hình tròn */
+    padding: 8px; /* Khoảng cách từ icon đến viền nút */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    color: var(--primary-color);
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background-color: #ccc; /* Màu nền khi hover */
+    border-color: #aaa; /* Viền khi hover */
+}
+
 .product-propose_new-item {
+    width: 250px;
     position: relative;
     margin-top: 18px;
+}
+
+.product-propose_new-item .product-top {
+    max-width: 94%;
+    padding-left: 32px;
+    margin: auto;
 }
 
 .product-propose_new-item_img {
