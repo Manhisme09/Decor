@@ -36,4 +36,9 @@ class SanPham extends Model
     public function image(){
         return $this->hasMany(Image::class, 'product_id');
     }
+
+    public function scopeSearchAjax($query, $key)
+    {
+        return $query->where('ten_san_pham', 'LIKE', "%{$key}%")->limit(3);
+    }
 }

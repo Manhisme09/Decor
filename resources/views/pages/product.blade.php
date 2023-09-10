@@ -104,18 +104,19 @@
                     <div class="line"></div>
                 </div>
                 <div class="product-propose_new active">
-                    <div class="product-propose_btn product-propose_prev"><i class="fas fa-angle-left"></i></div>
-                    <div class="product-propose_btn product-propose_next"><i class="fas fa-angle-right"></i></div>
-                    <div class="row row-nowrap">
+                    <div class="slick-slider">
                         @foreach ($topSanpham as $item)
-                            <div class="col l-3 m-4 c-6 prpduct-propose_list">
+                            <div>
                                 <div class="product-propose_new-item">
-                                    <img class="product-propose_new-item_img" src="{{ asset($item->hinh_anh) }}"
+                                    <a href="{{ route('pages.chitietsanpham', ['id' => $item->id, 'slug' => $item->slug]) }}">
+                                    <img class="product-propose_new-item_img" src="{{ asset($item->image[0]->url) }}"
                                         alt="FURNIBUY">
-                                    {{-- <img src="https://tokyolife.vn/media/wysiwyg/home/I-Online.svg" alt="" class="product-propose_new-item_logo"> --}}
-                                    <p class="product-propose_new-item_info">{{ $item->ten_san_pham }}</p>
-                                    <h4 class="product-propose_new-item_price">Giá: {{ number_format($item->gia_ban) }}
-                                        VNĐ</h4>
+                                    <div class="product-top">
+                                        <p class="product-propose_new-item_info">{{ $item->ten_san_pham }}</p>
+                                        <h4 class="product-propose_new-item_price">Giá: {{ number_format($item->gia_ban) }}
+                                            VNĐ</h4>
+                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach

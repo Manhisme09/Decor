@@ -44,7 +44,7 @@
                                         <tr align="center">
                                             <td style="vertical-align: middle">{{ $s++ }}</td>
                                             <td style="vertical-align: middle">{{ $item['sanphamInfo']->ten_san_pham }}</td>
-                                            <td><img src="{{ asset($item['sanphamInfo']->hinh_anh) }}" alt=""
+                                            <td><img src="{{ asset($item['sanphamInfo']->image[0]->url) }}" alt=""
                                                     width="180px" height="120px"></td>
                                             <td style="vertical-align: middle"> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
 
@@ -61,7 +61,7 @@
                                             </td>
 
                                             <td style="vertical-align: middle">
-                                                <a class="remove" style="cursor: pointer"
+                                                <a class="remove" style="cursor: pointer; color: #f76b6a"
                                                     onclick="deleteCart({{ $item['sanphamInfo']->id }})"
                                                     title="Xoá sản phẩm"><i class="fa fa-trash"></i></a>
                                             </td>

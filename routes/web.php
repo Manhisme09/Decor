@@ -77,7 +77,9 @@ Route::post('gui-mail', [AuthController::class, 'sendMail'])->name('pages.sendMa
 Route::get('quen-mat-khau', [AuthController::class, 'forgotPassword'])->name('pages.quenmatkhau');
 Route::get('update-new-pass', [AuthController::class, 'updatePass'])->name('pages.getUpdatePass');
 Route::post('update-new-pass', [AuthController::class, 'postUpdatePass'])->name('pages.postUpdatePass');
-Route::get('tìm-kiem', [PageController::class, 'search'])->name('pages.timkiem');
+Route::get('search', [PageController::class, 'search'])->name('pages.timkiem');
+Route::get('/ajax-search-product', [PageController::class, 'ajaxSearch'])->name('ajax-search-product');
+
 
 /*=== admin ===*/
 

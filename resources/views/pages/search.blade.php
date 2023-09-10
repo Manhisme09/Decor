@@ -3,11 +3,19 @@
     <title>Danh sách sản phẩm | Nội thất Furnibuy</title>
 @endsection
 @section('content')
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tìm kiếm</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="sidebar-main">
             <div class="sidebar-content">
                 <section id="title-menu">
@@ -19,14 +27,6 @@
                                     href="{{ route('pages.product', ['id' => $list->id]) }}">{{ $list->ten_danh_muc }}</a>
                             </li>
                         @endforeach
-                    </ul>
-                </section>
-                <section id="contact-menu">
-                    <h2 class="widget-title">Hỗ trợ trực tuyến</h2>
-                    <img src="{{ asset('images/support.gif') }}" alt="">
-                    <ul id="menu-items">
-                        <li class="item-menu-product"> <i class="fas fa-phone-square"></i> + 0963.733.733 </li>
-                        <li class="item-menu-product"> <i class="fas fa-envelope"></i> noithatfurnibuy@gmail.com </li>
                     </ul>
                 </section>
             </div>
@@ -49,7 +49,7 @@
                                                             <a
                                                                 href="{{ route('pages.chitietsanpham', ['slug'=>$sanpham->slug,'id' => $sanpham->id]) }}">
                                                                 <img class="product-propose_new-item_img"
-                                                                    src="{{ asset($sanpham->hinh_anh) }}" alt="Lights"
+                                                                    src="{{ asset($sanpham->image[0]->url) }}" alt="Lights"
                                                                     style="width:100%">
                                                                 <div class="caption">
                                                                     <p class="product-propose_new-item_info">
@@ -87,7 +87,7 @@
                         @foreach ($topSanpham as $item)
                             <div class="col l-3 m-4 c-6 prpduct-propose_list">
                                 <div class="product-propose_new-item">
-                                    <img class="product-propose_new-item_img" src="{{ asset($item->hinh_anh) }}"
+                                    <img class="product-propose_new-item_img" src="{{ asset($item->image[0]->url) }}"
                                         alt="FURNIBUY">
                                     <p class="product-propose_new-item_info">{{ $item->ten_san_pham }}</p>
                                     <h4 class="product-propose_new-item_price">Giá: {{ number_format($item->gia_ban) }}

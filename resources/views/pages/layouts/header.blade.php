@@ -119,12 +119,14 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Sản phẩm bạn muốn tìm..." aria-label="Search">
+                          <form action="{{ route('pages.timkiem') }}" method="GET" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" id="search-ajax" name="keyname" type="search" placeholder="Sản phẩm bạn muốn tìm..." aria-label="Search">
                             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">
                                 <span style="color: #ffff" class="fa fa-search"></span>
                             </button>
                           </form>
+                        </div>
+                        <div class="wrap_suggest" id="show_search">
                         </div>
                       </div>
                     </div>

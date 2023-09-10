@@ -116,6 +116,10 @@
                                                                     {{ number_format($all->gia_ban) }} VNĐ</h4>
                                                             </div>
                                                         </a>
+                                                        <ul class="featured__item__pic__hover">
+                                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                            <li><a href="{{ route('pages.giohang') }}" onclick="addCart({{ $all->id }})" data-id="{{ $all->id }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             @endforeach

@@ -33,6 +33,7 @@ class PageController extends Controller
         $productData = [];
         foreach ($products as $product) {
             $productData[] = [
+                'id' => $product->id,
                 'name' => $product->ten_san_pham,
                 'price' => number_format($product->gia_ban) . ' VNĐ',
                 'image' => asset($product->image[0]->url),
@@ -121,7 +122,6 @@ class PageController extends Controller
     public function postDetail($id)
     {
         $post_detail = BaiViet::find($id);
-        // dd($post_detail);
         return view('pages.BaiViet.chitietbaiviet', compact('post_detail'));
     }
 
@@ -131,7 +131,13 @@ class PageController extends Controller
         $menu = DanhMuc::all();
         $sanPham = SanPham::where('ten_san_pham', 'like', '%' . $request->keyname . '%')
             ->orwhere('gia_ban', $request->keyname)->get();
-        // dd($sanPham);
         return view('pages.search', compact('sanPham', 'menu'));
+    }
+
+    public function ajaxSearch(Request $request)
+    {
+        $key = $request->keyname;
+        $products = SanPham::searchAjax($key)->get();
+        return view('pages.ajaxSearch', compact('products'));
     }
 }

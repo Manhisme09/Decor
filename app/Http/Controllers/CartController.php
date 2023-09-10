@@ -10,6 +10,7 @@ use App\Models\KhachHang;
 use App\Models\ChiTietHoaDon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CartController extends Controller
 {
@@ -27,9 +28,8 @@ class CartController extends Controller
             $newCart->addCart($sanPham, $id);
             $request->session()->put('Cart', $newCart);
         }
-        // dd($sanPham);
-        view('pages.giohang', compact('newCart'));
-        return redirect()->back();
+        Toastr::success('Sản phẩm đã được thêm vào giỏ hàng !', 'Thành công');
+        return view('pages.giohang', compact('newCart'));
     }
 
     public function updateCart(Request $request, $id, $tong)
@@ -38,6 +38,7 @@ class CartController extends Controller
         $newCart = new Cart($oldCart);
         $newCart->UpdateItemCart($id, $tong);
         $request->Session()->put('Cart', $newCart);
+        Toastr::success('Cập nhật giỏ hàng thành công !', 'Thành công');
         return redirect()->route('pages.giohang');
     }
 
@@ -51,6 +52,7 @@ class CartController extends Controller
         } else {
             $request->Session()->forget('Cart');
         }
+        Toastr::success('Đã xoá sản phẩm khỏi giỏ hàng !', 'Thành công');
         return redirect()->route('pages.giohang');
     }
 

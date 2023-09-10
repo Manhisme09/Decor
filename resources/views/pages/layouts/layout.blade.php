@@ -53,6 +53,31 @@
     </script> --}}
 
     <script>
+        $(document).ready(function() {
+        $('#show_search').hide();
+        $('#search-ajax').keyup(function() {
+            var search = $('#search-ajax').val();
+            if (search != '') {
+            $.ajax({
+                url: '/ajax-search-product/?keyname=' + search,
+                type: "GET",
+                data: {
+                search: search
+                },
+                success: function(data) {
+                $('#show_search').show(100);
+                $('#show_search').html(data);
+                }
+            })
+            }else {
+            $('#show_search').hide();
+            $('#show_search').html('');
+            }
+        })
+        })
+    </script>
+
+    <script>
         $(document).ready(function(){
             $('.slick-slider').slick({
                 infinite: true,
@@ -83,14 +108,22 @@
                             var productContainer = $('#product-list');
 
                             $.each(response, function(index, product) {
-                                var productHtml = '<div class="col-md-3" style="margin: 30px 0px">' +
-                                    '<div class="thumbnail">' +
-                                    '<a href="' + product.link + '">' +
-                                    '<img class="product-propose_new-item_img" src="' + product.image + '" alt="Lights" style="width:100%">' +
-                                    '<div class="caption">' +
-                                    '<p class="product-propose_new-item_info">' + product.name + '</p>' +
-                                    '<h4 class="product-propose_new-item_price">Giá: ' + product.price + '</h4>' +
-                                    '</div></a></div></div>';
+                                var productHtml = `
+                                    <div class="col-md-3" style="margin: 30px 0px">
+                                        <div class="thumbnail">
+                                            <a href="${product.link}">
+                                                <img class="product-propose_new-item_img" src="${product.image}" alt="Lights" style="width:100%">
+                                                <div class="caption">
+                                                    <p class="product-propose_new-item_info">${product.name}</p>
+                                                    <h4 class="product-propose_new-item_price">Giá: ${product.price}</h4>
+                                                </div>
+                                            </a>
+                                            <ul class="featured__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="{{ route('pages.giohang') }}" onclick="addCart(${product.id})" data-id="${product.id}"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>`;
 
                                 productContainer.append(productHtml);
                             });
@@ -142,7 +175,7 @@
             }).done(function(response) {
                 $("#cart").empty();
                 $("#cart").html(response);
-                siiimpleToast.success('Sản phẩm đã được thêm vào giỏ hàng !')
+                // siiimpleToast.success('Sản phẩm đã được thêm vào giỏ hàng !')
             })
         }
 
@@ -153,7 +186,7 @@
             }).done(function(response) {
                 $("#cart").empty();
                 $("#cart").html(response);
-                siiimpleToast.success('Đã xoá sản phẩm khỏi giỏ hàng !');
+                // siiimpleToast.success('Đã xoá sản phẩm khỏi giỏ hàng !');
             })
         }
 
@@ -165,7 +198,7 @@
             }).done(function(response) {
                 $("#cart").empty();
                 $("#cart").html(response);
-                siiimpleToast.success('Cập nhật giỏ hàng thành công!');
+                // siiimpleToast.success('Cập nhật giỏ hàng thành công!');
             })
         }
 
