@@ -147,6 +147,12 @@
     </script>
 
     <script>
+        document.getElementById("orderSelect").addEventListener("change", function() {
+            document.getElementById("orderForm").submit();
+        });
+    </script>
+
+    <script>
         $(document).ready(function($) {
             $(window).scroll(function() {
                 if ($(this).scrollTop()) {

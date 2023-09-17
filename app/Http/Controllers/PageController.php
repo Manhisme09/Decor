@@ -46,12 +46,30 @@ class PageController extends Controller
 
     public function getProduct($id)
     {
-        $sanPham = SanPham::where('danh_muc_id', $id)->get();
+        $orderBy = request('orderby');
+        $sanPham = SanPham::where('danh_muc_id', $id);
+
+        switch ($orderBy) {
+            case 'name':
+                $sanPham->orderBy('ten_san_pham', 'asc');
+                break;
+            case 'price':
+                $sanPham->orderBy('gia_ban', 'asc');
+                break;
+            case 'price-desc':
+                $sanPham->orderBy('gia_ban', 'desc');
+                break;
+            default:
+                $sanPham->orderBy('da_ban', 'desc');
+                break;
+        }
+
+        $sanPham = $sanPham->get();
         $danhMuc = DanhMuc::where('id', $id)->first();
         $listDanhmuc = DanhMuc::where('parent_id', '!=', 0)->get();
         $topSanpham = SanPham::where('da_ban', '>', 10)->get();
-        // dd($sanPham['0']);
-        return view('pages.product', compact('sanPham', 'danhMuc', 'listDanhmuc', 'topSanpham'));
+
+        return view('pages.product', compact('sanPham', 'danhMuc', 'listDanhmuc', 'topSanpham', 'orderBy'));
     }
 
     public function getProductDetail($slug,$id)

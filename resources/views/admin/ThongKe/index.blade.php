@@ -11,7 +11,19 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Thống kê doanh thu theo tháng</div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                    <div class="panel-heading">Thống kê doanh thu theo tháng</div>
+                    <div>
+                        <form method="GET" action="{{ route('admin.thongke.index') }}" id="yearForm">
+                            <label style="font-weight: normal" for="yearSelect">Chọn năm: </label>
+                            <select id="yearSelect" name="selectedYear">
+                                <option value="2022" @if ($selectedYear == "2022") selected @endif>2022</option>
+                                <option value="2023" @if ($selectedYear == "2023") selected @endif>2023</option>
+                                <option value="2024" @if ($selectedYear == "2024") selected @endif>2024</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <canvas id="canvas" height="280" width="600"></canvas>
                 </div>
@@ -58,6 +70,11 @@
         <!-- /.col-lg-12 -->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+        document.getElementById("yearSelect").addEventListener("change", function() {
+            document.getElementById("yearForm").submit();
+        });
+    </script>
     <script>
         var month = <?php echo $month; ?>;
         var hoadon = <?php echo $hoadon; ?>;

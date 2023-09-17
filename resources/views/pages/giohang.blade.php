@@ -45,8 +45,8 @@
                                             <td style="vertical-align: middle">{{ $s++ }}</td>
                                             <td style="vertical-align: middle">{{ $item['sanphamInfo']->ten_san_pham }}</td>
                                             <td><img src="{{ asset($item['sanphamInfo']->image[0]->url) }}" alt=""
-                                                    width="180px" height="120px"></td>
-                                            <td style="vertical-align: middle"> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
+                                                    width="150px" height="120px"></td>
+                                            <td style="vertical-align: middle; width: 200px"> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
 
                                             <td style="vertical-align: middle"><select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
                                                     data-idselect="{{ $item['sanphamInfo']->id }}"
@@ -109,7 +109,7 @@
                                             0
                                         @endif
                                     </span></div>
-                                <div class="cart-totals-row"><a class="btn"
+                                <div class="cart-totals-row"><a class="btn beta-btn primary"
                                         href="{{ route('pages.thanhtoan') }}" style="margin: 0 130px">Đặt hàng</a></div>
                             </div>
 

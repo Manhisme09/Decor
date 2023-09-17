@@ -100,11 +100,6 @@ class CartController extends Controller
             $cthd->don_gia = $value['gia_ban'] / $value['so_luong'];
             $cthd->thanh_tien = $value['so_luong'] * ($value['gia_ban'] / $value['so_luong']);
             $cthd->save();
-
-            $sanpham = SanPham::find($key);
-            $sanpham->so_luong -= $value['so_luong'];
-            $sanpham->da_ban += $value['so_luong'];
-            $sanpham->save();
         }
 
         $request->Session()->forget('Cart');

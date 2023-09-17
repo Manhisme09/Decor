@@ -44,8 +44,8 @@
 
 <body>
     <div class="header">
-        <h2>CỬA HÀNG NỘI THẤT FURNIBUY.COM</h2>
-        <p>Đ/C: Số 211 Vũ Tông Phan – Thanh Xuân – Hà Nội</p>
+        <h2>CỬA HÀNG ĐỒ TRANG TRÍ MANH HOUSE</h2>
+        <p>Đ/C: Số 123 Tiên Dược – Sóc Sơn – Hà Nội</p>
         <p>ĐT: 0858.901.689</p>
         <h2>HOÁ ĐƠN BÁN HÀNG</h2>
     </div>

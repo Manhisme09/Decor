@@ -342,6 +342,12 @@ span {
     color: var(--primary-color);
   }
 
+  .infor_checkout {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 64px;
+  }
+
   @media (min-width: 768px) {
     .modal-dialog {
       max-width: 600px;
@@ -973,6 +979,7 @@ a:focus {
 }
 
 .slick-next {
+    margin-top: -35px;
     font-size: 24px;
     line-height: 1;
     position: absolute;
@@ -991,6 +998,7 @@ a:focus {
 }
 
 .slick-prev {
+    margin-top: -35px;
     font-size: 24px;
     line-height: 1;
     position: absolute;
@@ -1992,6 +2000,10 @@ a:focus {
 
 }
 
+.table-order > tbody > tr > td {
+    vertical-align: inherit;
+}
+
 .btn-buy:hover {
     filter: brightness(85%);
 }
@@ -2165,15 +2177,28 @@ a:focus {
     color: #a3a2a2;
 }
 
+.filter-product {
+    text-align: end;
+    position: absolute;
+    right: 103px;
+    top: 50%;
+    z-index: 9999;
+}
+
+.filter-product .select-order {
+    height: 25px;
+    width: 150px;
+}
+
 .cart-total-title {
     background-color: #fdfdfd;
-    color: #000;
+    color: white;
     font-size: 22px;
     line-height: 55px;
     margin-bottom: 0;
     margin-top: 0;
     text-align: center;
-    background-color: #468af7;
+    background-color: var(--primary-color);
 }
 
 /* Thanh toán */
@@ -2238,9 +2263,10 @@ a:focus {
 }
 
 .beta-btn.primary {
-    color: var(--white-color);
-    background-color: #468af7;
-    border: 1px solid #468af7;
+    color: white;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
     padding: 10px 20px;
     line-height: 100%;
     font-weight: 1.6;

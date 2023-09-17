@@ -17,6 +17,16 @@
         </div>
     </div>
     <div class="container">
+        <div class="filter-product">
+            <form method="GET" action="{{ route('pages.product', ['id' => $danhMuc->id]) }}" id="orderForm">
+                <select class="select-order" id="orderSelect" name="orderby">
+                    <option value="popularity" @if ($orderBy == "popularity") selected @endif>Phổ biến</option>
+                    <option value="name" @if ($orderBy == "name") selected @endif>Sắp xếp theo tên</option>
+                    <option value="price" @if ($orderBy == "price") selected @endif>Giá: Tăng dần</option>
+                    <option value="price-desc" @if ($orderBy == "price-desc") selected @endif>Giá: Giảm dần</option>
+                </select>
+            </form>
+        </div>
         <div class="sidebar-main">
             <div class="sidebar-content">
                 <section id="title-menu">
@@ -24,7 +34,7 @@
                     <ul id="menu-items">
                         @foreach ($listDanhmuc as $list)
                             <li class="item-menu-product">
-                                <a href="{{ route('pages.product', ['id' => $list->id, 'slug' => $list->slug]) }}">{{ $list->ten_danh_muc }}</a>
+                                <a href="{{ route('pages.product', ['id' => $list->id]) }}">{{ $list->ten_danh_muc }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -81,6 +91,10 @@
                                                                         {{ number_format($sanpham->gia_ban) }} VNĐ</h4>
                                                                 </div>
                                                             </a>
+                                                            <ul class="featured__item__pic__hover">
+                                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                                <li><a href="{{ route('pages.giohang') }}" onclick="addCart({{ $sanpham->id }})" data-id="{{ $sanpham->id }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 @endforeach

@@ -3,13 +3,20 @@
     <title>Thanh toán đơn hàng | Nội thất Furnibuy</title>
 @endsection
 @section('content')
-
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-            <span><a href="{{ route('pages.giohang') }}">Giỏ hàng</a></span> /
-            <span><a href="{{ route('pages.thanhtoan') }}">Thanh toán</a></span>
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('pages.giohang') }}">Giỏ hàng</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="main">
             <div class="grid wide">
                 <div class="payment-title">
@@ -79,7 +86,7 @@
                                                             <!--  one item	 -->
                                                             <div class="media">
                                                                 <img width="50%"
-                                                                    src="{{ asset($item['sanphamInfo']->hinh_anh) }}"
+                                                                    src="{{ asset($item['sanphamInfo']->image[0]->url) }}"
                                                                     alt="" class="pull-left">
                                                                 <div class="media-body">
                                                                     <p class="font-large">
@@ -186,16 +193,19 @@
                                                         <div>
                                                             <!--  one item	 -->
                                                             <div class="media">
-                                                                <img width="50%"
-                                                                    src="{{ asset($item['sanphamInfo']->hinh_anh) }}"
+                                                                <img style="width: 100px; height:100px"
+                                                                    src="{{ asset($item['sanphamInfo']->image[0]->url) }}"
                                                                     alt="" class="pull-left">
                                                                 <div class="media-body">
                                                                     <p class="font-large">
                                                                         {{ $item['sanphamInfo']->ten_san_pham }}</p>
-                                                                    <p class="color-gray your-order-info">Giá:
-                                                                        {{ $item['sanphamInfo']->gia_ban }}</p>
-                                                                    <p class="color-gray your-order-info">Số lượng:
-                                                                        {{ $item['so_luong'] }}</p>
+                                                                    <div class="infor_checkout">
+                                                                        <p class="color-gray your-order-info">x
+                                                                            {{ $item['so_luong'] }}</p>
+
+                                                                        <p class="color-gray your-order-info">Giá:
+                                                                                {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <!-- end one item -->
@@ -206,10 +216,10 @@
                                             @endif
                                             <div class="your-order-item">
                                                 <div class="pull-left">
-                                                    <h4 class="your-order-f18">Tổng số tiền:</h4>
+                                                    <h4 style="font-weight:bold; font-size: 25px" class="your-order-f18">Tổng số tiền:</h4>
                                                 </div>
                                                 <div class="pull-right">
-                                                    <h4 class="color-black">
+                                                    <h4 style="font-weight:bold" class="color-black">
                                                         {{ number_format(Session::get('Cart')->tonggia) }} VNĐ</h4>
                                                 </div>
                                                 <div class="clearfix"></div>

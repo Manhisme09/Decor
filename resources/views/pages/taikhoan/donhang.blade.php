@@ -77,7 +77,7 @@
                                             </tbody>
                                         </table>
                                     @else
-                                        <table class="table table-striped table-bordered table-hover" id="table-admin">
+                                        <table class="table table-striped table-bordered table-hover table-order" id="table-admin">
                                             <thead>
                                                 <tr>
                                                     <th>STT</th>
@@ -118,7 +118,7 @@
                                                             <td>
                                                                 @if ($hd->status == 0)
                                                                     <a href="{{ route('pages.Huy', ['id' => $hd->id]) }}"
-                                                                        class="btn btn-danger">Huỷ đơn hàng</a>
+                                                                     class="btn beta-btn primary">Huỷ đơn hàng</a>
                                                                 @else
                                                                     <span>Không thể huỷ đơn hàng</span>
                                                                 @endif
