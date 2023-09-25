@@ -19,7 +19,7 @@
     <div class="container">
         <div class="filter-product">
             <form method="GET" action="{{ route('pages.product', ['id' => $danhMuc->id]) }}" id="orderForm">
-                <select class="select-order" id="orderSelect" name="orderby">
+                <select class="select-order" id="orderSelect" name="orderBy">
                     <option value="popularity" @if ($orderBy == "popularity") selected @endif>Phổ biến</option>
                     <option value="name" @if ($orderBy == "name") selected @endif>Sắp xếp theo tên</option>
                     <option value="price" @if ($orderBy == "price") selected @endif>Giá: Tăng dần</option>
@@ -67,16 +67,8 @@
                                 <div class="row">
                                     <div class="col l-12 m-10 c-12">
                                         <div id="product1" class="product-content_about product-propose_new active">
-                                            <div class="row">
+                                            <div class="row" id="product-page-list">
                                                 @foreach ($sanPham as $sanpham)
-                                                    {{-- <div class="col l-4 m-4 c-6">
-                                                <div class="product-propose_new-item">
-                                                    <img src="{{ asset($sanpham->hinh_anh) }}" alt="FURNIBUY" class="product-propose_new-item_img">
-
-                                                    <p class="product-propose_new-item_info"> {{ $sanpham->ten_san_pham }}</p>
-                                                    <h4 class="product-propose_new-item_price">Giá: {{ number_format($sanpham->gia_ban) }} VNĐ</h4>
-                                                </div>
-                                            </div> --}}
                                                     <div class="col-md-4" style="margin: 30px 0px">
                                                         <div class="thumbnail">
                                                             <a
@@ -99,6 +91,12 @@
                                                     </div>
                                                 @endforeach
 
+                                            </div>
+                                            <div style="display: none" id="idProductType">{{ $idProductType }}</div>
+                                            <div style="display: none" id="orderByProductType">{{ $orderBy }}</div>
+                                            <div class="paginate" id="load-more-container">
+                                                <span id="icon-load-more-page"><i class="fas fa-sync-alt"></i></span>
+                                                <span id="load-more-page">Xem thêm...</span>
                                             </div>
                                         </div>
                                     </div>

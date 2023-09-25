@@ -1208,8 +1208,30 @@ a:focus {
     color: #aaa;
 }
 
+.main-content .paginate {
+    text-align: center;
+}
+
+.main-content .paginate #load-more-page {
+    color: #aaa;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.main-content .paginate #icon-load-more-page{
+    font-size: 17px;
+    margin-right:10px;
+    color: #aaa;
+}
+
 #load-more-container:hover #load-more,
 #load-more-container:hover #icon-load-more {
+    color: var(--primary-color);
+}
+
+#load-more-container:hover #load-more-page,
+#load-more-container:hover #icon-load-more-page {
     color: var(--primary-color);
 }
 
@@ -1622,7 +1644,6 @@ a:focus {
     justify-content: flex-start;
     text-align: start;
     flex-wrap: nowrap;
-    padding: 20px 0px;
 }
 
 .sidebar-content {
@@ -2179,9 +2200,7 @@ a:focus {
 
 .filter-product {
     text-align: end;
-    position: absolute;
-    right: 103px;
-    top: 50%;
+    margin-top: 20px;
     z-index: 9999;
 }
 

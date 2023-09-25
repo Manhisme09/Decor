@@ -44,11 +44,52 @@ class PageController extends Controller
         return response()->json($productData);
     }
 
+    public function loadMorePageProducts(Request $request)
+    {
+        $offset = $request->input('offset', 0);
+        $idProductType = $request->input('idProductType');
+
+        $limit = 6;
+        $orderBy = $request->input('orderBy');
+
+        $query = SanPham::where('danh_muc_id', $idProductType);
+
+        switch ($orderBy) {
+            case 'name':
+                $query->orderBy('ten_san_pham', 'asc');
+                break;
+            case 'price':
+                $query->orderBy('gia_ban', 'asc');
+                break;
+            case 'price-desc':
+                $query->orderBy('gia_ban', 'desc');
+                break;
+            default:
+                $query->orderBy('da_ban', 'desc');
+                break;
+        }
+
+        $products = $query->offset($offset)->limit($limit)->get();
+
+        $productData = [];
+        foreach ($products as $product) {
+            $productData[] = [
+                'id' => $product->id,
+                'name' => $product->ten_san_pham,
+                'price' => number_format($product->gia_ban) . ' VNĐ',
+                'image' => asset($product->image[0]->url),
+                'link' => route('pages.chitietsanpham', ['slug' => $product->slug, 'id' => $product->id]),
+            ];
+        }
+
+        return response()->json($productData);
+    }
+
     public function getProduct($id)
     {
-        $orderBy = request('orderby');
+        $orderBy = request('orderBy');
         $sanPham = SanPham::where('danh_muc_id', $id);
-
+        $idProductType = $id;
         switch ($orderBy) {
             case 'name':
                 $sanPham->orderBy('ten_san_pham', 'asc');
@@ -64,12 +105,12 @@ class PageController extends Controller
                 break;
         }
 
-        $sanPham = $sanPham->get();
+        $sanPham = $sanPham->paginate(6, ['*'], 'pag');
         $danhMuc = DanhMuc::where('id', $id)->first();
         $listDanhmuc = DanhMuc::where('parent_id', '!=', 0)->get();
         $topSanpham = SanPham::where('da_ban', '>', 10)->get();
 
-        return view('pages.product', compact('sanPham', 'danhMuc', 'listDanhmuc', 'topSanpham', 'orderBy'));
+        return view('pages.product', compact('sanPham', 'danhMuc', 'listDanhmuc', 'topSanpham', 'orderBy', 'idProductType'));
     }
 
     public function getProductDetail($slug,$id)

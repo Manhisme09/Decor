@@ -146,6 +146,63 @@
         });
     </script>
 
+<script>
+    $(document).ready(function() {
+        var offset = 6; // Số lượng sản phẩm đã hiển thị ban đầu
+        var limit = 6; // Số lượng sản phẩm tối đa cho mỗi lần tải thêm
+        var loadMoreButton = $('#load-more-page');
+        var loadMoreIcon = $('#icon-load-more-page');
+        var idProductType = $("#idProductType").text();
+        var orderBy = $("#orderByProductType").text();
+
+        $('#load-more-page').click(function() {
+            $.ajax({
+                url: '/load-more-page-products',
+                type: 'GET',
+                data: { offset: offset, idProductType: idProductType, orderBy: orderBy },
+                success: function(response) {
+                    if (response.length > 0) {
+                        var productContainer = $('#product-page-list');
+
+                        $.each(response, function(index, product) {
+                            var productHtml = `
+                                <div class="col-md-4" style="margin: 30px 0px">
+                                    <div class="thumbnail">
+                                        <a href="${product.link}">
+                                            <img class="product-propose_new-item_img" src="${product.image}" alt="Lights" style="width:100%">
+                                            <div class="caption">
+                                                <p class="product-propose_new-item_info">${product.name}</p>
+                                                <h4 class="product-propose_new-item_price">Giá: ${product.price}</h4>
+                                            </div>
+                                        </a>
+                                        <ul class="featured__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="{{ route('pages.giohang') }}" onclick="addCart(${product.id})" data-id="${product.id}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>`;
+
+                            productContainer.append(productHtml);
+                        });
+
+                        offset += limit;
+                    } else {
+                        $('#load-more-page').text('Tất cả sản phẩm đã được tải');
+                        loadMoreButton.css({
+                            'cursor': 'auto',
+                            'color': 'gray',
+                        });
+                        loadMoreIcon.css({
+                            'cursor': 'auto',
+                            'color': 'gray',
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+
     <script>
         document.getElementById("orderSelect").addEventListener("change", function() {
             document.getElementById("orderForm").submit();
