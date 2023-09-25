@@ -69,7 +69,6 @@
                         <div class="detail-product">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#home">MÔ TẢ</a></li>
-                                <li><a data-toggle="tab" href="#menu1">LÀM THEO YÊU CẦU</a></li>
                                 <li><a data-toggle="tab" href="#menu2">CÁCH MUA HÀNG</a></li>
                             </ul>
 
@@ -77,28 +76,8 @@
                                 <div id="home" class="tab-pane fade in active">
                                     <p>{!! $chiTiet->mo_ta !!}</p>
                                 </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <p>Bên cạnh sản phẩm có bán sẵn như bên, quý khách cũng có thể đặt đóng đồ nội thất theo
-                                        nhu cầu riêng của mình.</p>
-                                    <p>Hiện nội thất FurniBuy.com có nhận đóng các mặt hàng nội thất với giá rẻ trực tiếp
-                                        tại xưởng. Bao gồm:</p>
-                                    <p>- Làm theo mẫu mã khách hàng thích (hình ảnh, bản vẽ thiết kế…)</p>
-                                    <p>- Làm theo chất liệu riêng khách hàng chọn lựa</p>
-                                    <p>- Chọn màu sắc theo sở thích</p>
-                                    <p>- Kích thước riêng vừa với không gian kê</p>
-                                    <p>Thời gian làm nhanh chỉ khoảng 3-6 ngày tùy vào độ khó của mẫu thiết kế, một số
-                                        trường hợp còn có thể nhanh hơn.</p>
-                                    <p>Nhận làm với mọi số lượng, từ đơn hàng lẻ hộ gia đình tới các đơn hàng lớn cho các dự
-                                        án và các công ty đối tác.</p>
-                                    <p>Nội thất FurniBuy.com hoàn toàn chủ động về mặt sản xuất, với 3 xưởng sản xuất quy
-                                        mô, tự tin sẽ đáp ứng tốt yêu cầu của quý khách hàng. Có nhân viên đến khảo sát tư
-                                        vấn tận nơi theo yêu cầu.</p>
-                                    <p>Vui lòng liên hệ các cửa hàng trong hệ thống (xem địa chỉ và bản đồ chỉ đường dưới
-                                        chân website này) hoặc các số Hotline để được tư vấn chi tiết.</p>
-                                    <p>Rất hân hạnh được phục vụ!</p>
-                                </div>
                                 <div id="menu2" class="tab-pane fade">
-                                    <p>Nội thất FurniBuy.com xin kính chào quý khách.</p>
+                                    <p>Cửa hàng Manh House xin kính chào quý khách.</p>
                                     <p>Quý khách có thể mua hàng của chúng tôi dưới 4 hình thức:</p>
                                     <p>- Đến trực tiếp trải nghiệm và chọn mua (ưu tiên nhất)</p>
                                     <p>- Đặt hàng qua Điện thoại, Zalo (ưu tiên thứ 2)</p>
@@ -107,13 +86,13 @@
                                     <p>Sở dĩ chúng tôi sắp xếp theo thứ tự ưu tiên như trên là dựa trên sự đảm bảo tương tác
                                         tốt nhất với khách hàng, giúp khách hàng mua được sản phẩm ưng ý nhất đúng với nhu
                                         cầu sử dụng của mình.</p>
-                                    <p>-> Trải nghiệm thực tế (ngồi thử, nằm thử, dùng thử) sẽ tốt hơn là nhìn bằng mắt.</p>
+                                    <p>-> Trải nghiệm thực tế (dùng thử) sẽ tốt hơn là nhìn bằng mắt.</p>
                                     <p>-> Nhìn thực tế bằng mắt sẽ tốt hơn là chỉ nhìn hình ảnh chụp qua điện thoại, Zalo,
                                         xem trên mạng…</p>
                                     <p>-> Được tương tác, tư vấn kỹ, gửi hình ảnh thực tế sản phẩm… qua điện thoại, Zalo thì
                                         sẽ tốt hơn là chỉ xem qua trên website rồi bấm đặt hàng luôn…</p>
                                     <p>-> Được nhân viên có kinh nghiệm tư vấn thì sẽ đưa ra quyết định chuẩn xác hơn là tự
-                                        khách hàng mua khi mà không có kinh nghiệ</p>
+                                        khách hàng mua khi mà không có kinh nghiệm</p>
                                 </div>
                             </div>
                         </div>
