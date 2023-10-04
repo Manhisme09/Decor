@@ -2281,6 +2281,17 @@ a:focus {
     margin-bottom: -2px;
 }
 
+.beta-btn-view.primary {
+    color: white;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    line-height: 100%;
+    font-weight: 1.6;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .beta-btn.primary {
     color: white;
     background-color: var(--primary-color);

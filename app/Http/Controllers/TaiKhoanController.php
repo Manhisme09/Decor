@@ -60,17 +60,34 @@ class TaiKhoanController extends Controller
     }
     public function getUserOrder()
     {
-        // dd(Session('login'));
         if (Session('login')) {
             $orders = HoaDon::where('khach_hang_id', Session('login'))->orderBy('id', 'asc')->get();
-            // dd($orders);
             return view('pages.taikhoan.donhang', compact('orders'));
         } else {
             $hoadon = HoaDon::where('khach_hang_id', Auth::user()->khach_hang->id)->orderBy('id', 'asc')->get();
-            // dd($hoadon);
             return view('pages.taikhoan.donhang', compact('hoadon'));
         }
-        // dd($orders);
+    }
+
+    public function getOrderDetail($id)
+    {
+        $hoadon = HoaDon::find($id);
+        $respone = array('data' => $hoadon);
+
+        $khach_hang = $hoadon->khach_hang;
+        $respone['data']['khach_hang'] = $khach_hang;
+
+        foreach ($hoadon->chi_tiet_hoa_don as $item) {
+            $respone['data']['chi_tiet_hoa_don'] = $item;
+            // $respone['data']['hinh_anh'] = $item->san_pham->image[0]->url;
+            if ($item->san_pham) {
+                foreach ($item->san_pham as $item2) {
+                }
+            } else {
+                $respone['data']['chi_tiet_hoa_don']['san_pham'] = "Không tồn tại";
+            }
+        }
+        return $respone;
     }
 
     public function getHuy($id)

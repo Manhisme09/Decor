@@ -52,7 +52,6 @@ Route::get('xoa/{id}', [CartController::class, 'deleteCart'])->name('pages.xoagi
 Route::prefix('thanh-toan')->middleware('payment')->group(function () {
     Route::get('/', [CartController::class, 'getPayment'])->name('pages.thanhtoan');
     Route::post('/', [CartController::class, 'postPayment'])->name('pages.postthanhtoan');
-    Route::post('thanh-toan', [CartController::class, 'postPayment2'])->name('pages.postthanhtoan2');
     Route::get('thong-bao', [CartController::class, 'notify'])->name('pages.thongbao');
 });
 
@@ -62,9 +61,9 @@ Route::post('thong-tin-ca-nhan', [TaiKhoanController::class, 'postUserProfile'])
 Route::get('doi-mat-khau', [TaiKhoanController::class, 'getUserPassword'])->name('pages.getmatkhau');
 Route::post('doi-mat-khau', [TaiKhoanController::class, 'postUserPassword'])->name('pages.postmatkhau');
 Route::get('don-hang', [TaiKhoanController::class, 'getUserOrder'])->name('pages.getdonhang');
+Route::get('chi-tiet-don-hang/{id}', [TaiKhoanController::class, 'getOrderDetail'])->name('pages.order.detail');
+
 Route::get('huy-don-hang/{id}', [TaiKhoanController::class, 'getHuy'])->name('pages.Huy');
-Route::get('cham-soc-khach-hang', [PageController::class, 'getCskh'])->name('pages.getcskh');
-Route::post('cham-soc-khach-hang', [PageController::class, 'postCskh'])->name('pages.postcskh');
 
 Route::post('binh-luan/{id}', [PageController::class, 'postComment'])->name('pages.postbinhluan');
 
