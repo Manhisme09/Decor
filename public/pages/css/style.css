@@ -1886,6 +1886,7 @@ a:focus {
     clear: both;
     min-height: 400px;
     margin-bottom: 70px;
+    margin-top: 50px;
 }
 
 .main-content .content-img-product {
@@ -2279,6 +2280,49 @@ a:focus {
     display: block;
     margin-top: -5px;
     margin-bottom: -2px;
+}
+
+/* Định dạng phần tử cha */
+.quantity {
+    display: flex;
+    justify-content: center;
+}
+
+/* Định dạng nút trừ và nút cộng */
+.minus,
+.plus {
+    background-color: #f9f9f9;
+    color: black; /* Màu chữ */
+    cursor: pointer; /* Hiển thị con trỏ khi di chuột qua */
+    padding: 8px 12px; /* Kích thước của nút */
+    font-size: 16px; /* Kích thước chữ */
+    border: 1px solid #ddd;
+}
+
+/* Định dạng ô nhập số lượng */
+.input-text.qty {
+    width: 45px; /* Độ rộng của ô nhập */
+    text-align: center; /* Căn giữa nội dung trong ô nhập */
+    font-size: 16px; /* Kích thước chữ */
+    border: 1px solid #ccc; /* Viền của ô nhập */
+    border-radius: 5px; /* Bo tròn góc của ô nhập */
+}
+
+/* Định dạng khi di chuột qua nút trừ và nút cộng */
+.minus:hover, .plus:hover {
+    background-color: rgb(199, 196, 196); /* Màu nền khi di chuột qua */
+}
+
+/* Ẩn mũi tên tăng/giảm số trên input type number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .beta-btn-view.primary {

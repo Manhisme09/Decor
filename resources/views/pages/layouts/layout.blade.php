@@ -230,6 +230,82 @@
             $(".alert").slideUp(800);
         });
     </script>
+
+    <script>
+            // $(document).ready(function(){
+            //         $(".plus").click(function(){
+            //             var currentValue = parseInt($("#quantity").val());
+            //             var quantityProduct = parseInt($("#quantityProduct").val());
+            //             var idProduct = parseInt($("#idProduct").val());
+            //             console.log(idProduct);
+            //             if(currentValue < quantityProduct) {
+            //                 $("#quantity").val(currentValue + 1);
+            //                 updateItemCart(idProduct, currentValue + 1);
+            //             }
+            //         });
+
+            //         $(".minus").click(function(){
+            //             var currentValue = parseInt($("#quantity").val());
+            //             var idProduct = parseInt($("#idProduct").val());
+            //             if(currentValue > 1){
+            //                 $("#quantity").val(currentValue - 1);
+            //                 updateItemCart(idProduct, currentValue - 1);
+            //             }
+            //         });
+            //     });
+
+            $(document).ready(function() {
+                $(".plus").click(function() {
+                    var currentRow = $(this).closest('tr');
+                    var productId = currentRow.find('.productId').val();
+                    var productQuantity = currentRow.find('.productQuantity').val();
+                    var quantityInput = currentRow.find('.qty');
+
+                    var currentValue = parseInt(quantityInput.val());
+                    if (currentValue < parseInt(productQuantity)) {
+                        quantityInput.val(currentValue + 1);
+                        updateItemCart(productId, currentValue + 1);
+                    }
+                });
+
+                $(".minus").click(function() {
+                    var currentRow = $(this).closest('tr');
+                    var productId = currentRow.find('.productId').val();
+                    var quantityInput = currentRow.find('.qty');
+
+                    var currentValue = parseInt(quantityInput.val());
+                    if (currentValue > 1) {
+                        quantityInput.val(currentValue - 1);
+                        updateItemCart(productId, currentValue - 1);
+                    }
+                });
+            });
+    </script>
+
+    <script>
+            $(document).ready(function() {
+                $(".productQtyInput").on("blur", function() {
+                    var productId = $(this).data("productid");
+                    var newQuantity = parseInt($(this).val());
+                    var currentRow = $(this).closest('tr');
+                    var productQuantity = currentRow.find('.productQuantity').val();
+                    var oldQuantity = currentRow.find('.oldQuantity').val();
+
+                    // Kiểm tra nếu newQuantity không hợp lệ
+                    if (newQuantity > parseInt(productQuantity)) {
+                        // Hiển thị thông báo
+                        siiimpleToast.alert('Số lượng sản phẩm không đủ !');
+                        // Lấy lại giá trị cũ
+                        $(this).val(oldQuantity);
+                    } else {
+                        // Nếu newQuantity hợp lệ, cập nhật giỏ hàng
+                        updateItemCart(productId, newQuantity);
+                    }
+                });
+            });
+
+    </script>
+
     <script>
         function addCart(id) {
             $.ajax({
@@ -253,8 +329,7 @@
             })
         }
 
-        function updateItemCart(id) {
-            var value = $("#select-" + id).val();
+        function updateItemCart(id, value) {
             $.ajax({
                 url: '/cap-nhat-gio-hang/' + id + '/' + value,
                 type: 'GET',
@@ -264,6 +339,18 @@
                 // siiimpleToast.success('Cập nhật giỏ hàng thành công!');
             })
         }
+
+        // function updateItemCart(id) {
+        //     var value = $("#select-" + id).val();
+        //     $.ajax({
+        //         url: '/cap-nhat-gio-hang/' + id + '/' + value,
+        //         type: 'GET',
+        //     }).done(function(response) {
+        //         $("#cart").empty();
+        //         $("#cart").html(response);
+        //         // siiimpleToast.success('Cập nhật giỏ hàng thành công!');
+        //     })
+        // }
 
         $(function() {
             var minPrice = parseInt($("#min_price").val());

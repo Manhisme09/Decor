@@ -52,7 +52,7 @@
                                     </div>
                                     @if ($chiTiet->so_luong > 0)
                                         <div class="buy">
-                                            <a style="cursor: pointer; color: white;" class="btn-buy"
+                                            <a href="{{ route('pages.giohang') }}" style="cursor: pointer; color: white;" class="btn-buy"
                                                 onclick="addCart({{ $chiTiet->id }})" data-id="{{ $chiTiet->id }}">Thêm
                                                 vào giỏ hàng</a>
                                         </div>

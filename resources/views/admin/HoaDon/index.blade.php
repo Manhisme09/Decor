@@ -79,9 +79,9 @@
                                                 <a class="btn btn-primary btn-xs btn-view" href="#"
                                                     data-url="{{ route('admin.hoadon.getView', ['id' => $hd->id]) }}" ​><i
                                                         class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết</a>
-                                                <a class="btn btn-success btn-xs"
+                                                {{-- <a class="btn btn-success btn-xs"
                                                     href="{{ route('admin.hoadon.inhoadon', ['id' => $hd->id]) }}"><i
-                                                        class="fa fa-print" aria-hidden="true"></i> In hoá đơn</a>
+                                                        class="fa fa-print" aria-hidden="true"></i> In hoá đơn</a> --}}
                                             </td>
                                         </tr>
                                     @endforeach

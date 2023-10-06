@@ -48,7 +48,8 @@
                                                     width="150px" height="120px"></td>
                                             <td style="vertical-align: middle; width: 200px"> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
 
-                                            <td style="vertical-align: middle"><select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
+                                            <td style="vertical-align: middle">
+                                                {{-- <select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
                                                     data-idselect="{{ $item['sanphamInfo']->id }}"
                                                     onchange="updateItemCart({{ $item['sanphamInfo']->id }})"
                                                     style="width: 75px; height:30px">
@@ -57,7 +58,25 @@
                                                             @if ($i == $item['so_luong']) selected @endif>
                                                             {{ $i }}</option>
                                                     @endfor
-                                                </select>
+                                                </select> --}}
+                                                {{-- <div class="quantity buttons_added">
+                                                    <input type="number" hidden id="idProduct" value="{{ $item['sanphamInfo']->id }}">
+                                                    <input type="number" hidden id="quantityProduct" value="{{ $item['sanphamInfo']->so_luong }}">
+                                                    <input type="button" value="-" class="minus button is-form">
+                                                    <input type="number" id="quantity" class="input-text qty text" step="1" min="0" max="" name="cart[5589b748dedc01ec8041656653952749][qty]" value="{{ $item['so_luong'] }}" title="Qty" size="4" inputmode="numeric">
+                                                    <input type="button" value="+" class="plus button is-form">
+                                                </div> --}}
+
+                                                <div class="quantity buttons_added">
+                                                    <input type="number" class="productId" value="{{ $item['sanphamInfo']->id }}" hidden>
+                                                    <input type="number" class="productQuantity" value="{{ $item['sanphamInfo']->so_luong }}" hidden>
+                                                    <input type="number" class="oldQuantity" value="{{ $item['so_luong'] }}" hidden>
+                                                    <input type="button" value="-" class="minus button is-form">
+                                                    <input type="number" class="input-text qty text productQtyInput" step="1" min="0" max=""
+                                                        value="{{ $item['so_luong'] }}" title="Qty" size="4" inputmode="numeric" data-productid="{{ $item['sanphamInfo']->id }}">
+                                                    <input type="button" value="+" class="plus button is-form">
+                                                </div>
+
                                             </td>
 
                                             <td style="vertical-align: middle">

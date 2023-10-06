@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="checkbox">
                                                 <div>
-                                                    <input name="remember" type="checkbox">Ghi nhớ đăng nhập
+                                                    {{-- <input name="remember" type="checkbox">Ghi nhớ đăng nhập --}}
                                                 </div>
                                                 <div>
                                                     <a style="margin-left: 60px" href="{{ route('pages.quenmatkhau') }}">Quên
