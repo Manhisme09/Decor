@@ -34,7 +34,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading"> Tổng tiền hoá đơn theo ngày
-                    <a class="btn btn-primary pull-right" style="padding: 0px 12px" href="{{ route('admin.thongke.export') }}"><i class="fa fa-download" aria-hidden="true"></i> Tải về</a>
+                    {{-- <a class="btn btn-primary pull-right" style="padding: 0px 12px" href="{{ route('admin.thongke.export') }}"><i class="fa fa-download" aria-hidden="true"></i> Tải về</a> --}}
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

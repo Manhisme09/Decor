@@ -23,7 +23,7 @@
                 </div>
                 <div class="contact-content">
                     <div class="col-sm-6">
-                        <h5>CỬA HÀNG NỘI THẤT 1</h5>
+                        <h5>CỬA HÀNG MANH HOUSE 1</h5>
                         <p>Địa chỉ: Số 205 Nguyễn Xiển, Hà Nội</p>
                         <p>(mặt đường vành đai 3)</p>
                         <p>Hotline+Zalo : 0858.901.689</p>
@@ -32,7 +32,7 @@
                             bản đồ chỉ đường</a>
                     </div>
                     <div class="col-sm-6">
-                        <h5>CỬA HÀNG NỘI THẤT 2</h5>
+                        <h5>CỬA HÀNG MANH HOUSE 2</h5>
                         <p>Địa chỉ: Số 27 Đàm Quang Trung, Long Biên, Hà Nội</p>
                         <p>(Chân cầu Vĩnh Tuy, phía Long Biên)</p>
                         <p>Hotline+Zalo : 094.121.2323</p>
