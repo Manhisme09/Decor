@@ -8,6 +8,7 @@ use App\Models\SanPham;
 use App\Models\DanhMuc;
 use App\Models\LienHe;
 use App\Models\Slide;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,20 +17,100 @@ class PageController extends Controller
     public function index()
     {
         $topProduct = SanPham::where('da_ban', '>', 10)->get();
-        $allProduct = SanPham::paginate(12,['*'],'pag');
+        $allProduct = SanPham::orderBy('created_at', 'desc')->paginate(8, ['*'], 'pag');
         $slide = Slide::all();
         $posts = BaiViet::where('trang_thai', 1)->paginate(3);
         return view('pages.index', compact('topProduct', 'allProduct', 'posts', 'slide'));
     }
 
+    public function loadMoreProducts(Request $request)
+    {
+        $offset = $request->input('offset', 0);
+        $limit = 8; // Số lượng sản phẩm cần tải thêm
+
+        $products = SanPham::orderBy('created_at', 'desc')->offset($offset)->limit($limit)->get();
+
+        $productData = [];
+        foreach ($products as $product) {
+            $productData[] = [
+                'id' => $product->id,
+                'name' => $product->ten_san_pham,
+                'price' => number_format($product->gia_ban) . ' VNĐ',
+                'image' => asset($product->image[0]->url),
+                'link' => route('pages.chitietsanpham', ['slug' => $product->slug, 'id' => $product->id]),
+            ];
+        }
+
+        return response()->json($productData);
+    }
+
+    public function loadMorePageProducts(Request $request)
+    {
+        $offset = $request->input('offset', 0);
+        $idProductType = $request->input('idProductType');
+
+        $limit = 6;
+        $orderBy = $request->input('orderBy');
+
+        $query = SanPham::where('danh_muc_id', $idProductType);
+
+        switch ($orderBy) {
+            case 'name':
+                $query->orderBy('ten_san_pham', 'asc');
+                break;
+            case 'price':
+                $query->orderBy('gia_ban', 'asc');
+                break;
+            case 'price-desc':
+                $query->orderBy('gia_ban', 'desc');
+                break;
+            default:
+                $query->orderBy('da_ban', 'desc');
+                break;
+        }
+
+        $products = $query->offset($offset)->limit($limit)->get();
+
+        $productData = [];
+        foreach ($products as $product) {
+            $productData[] = [
+                'id' => $product->id,
+                'name' => $product->ten_san_pham,
+                'price' => number_format($product->gia_ban) . ' VNĐ',
+                'image' => asset($product->image[0]->url),
+                'link' => route('pages.chitietsanpham', ['slug' => $product->slug, 'id' => $product->id]),
+            ];
+        }
+
+        return response()->json($productData);
+    }
+
     public function getProduct($id)
     {
-        $sanPham = SanPham::where('danh_muc_id', $id)->get();
+        $orderBy = request('orderBy');
+        $sanPham = SanPham::where('danh_muc_id', $id);
+        $idProductType = $id;
+        switch ($orderBy) {
+            case 'name':
+                $sanPham->orderBy('ten_san_pham', 'asc');
+                break;
+            case 'price':
+                $sanPham->orderBy('gia_ban', 'asc');
+                break;
+            case 'price-desc':
+                $sanPham->orderBy('gia_ban', 'desc');
+                break;
+            default:
+                $sanPham->orderBy('da_ban', 'desc');
+                break;
+        }
+
+        $sanPham = $sanPham->paginate(6, ['*'], 'pag');
         $danhMuc = DanhMuc::where('id', $id)->first();
         $listDanhmuc = DanhMuc::where('parent_id', '!=', 0)->get();
         $topSanpham = SanPham::where('da_ban', '>', 10)->get();
-        // dd($sanPham['0']);
-        return view('pages.product', compact('sanPham', 'danhMuc', 'listDanhmuc', 'topSanpham'));
+
+        return view('pages.product', compact('sanPham', 'danhMuc', 'listDanhmuc', 'topSanpham', 'orderBy', 'idProductType'));
     }
 
     public function getProductDetail($slug,$id)
@@ -38,7 +119,8 @@ class PageController extends Controller
         $chiTiet = SanPham::find($id);
         $listDanhmuc = DanhMuc::where('parent_id', '!=', 0)->get();
         $tuongTu = SanPham::where('danh_muc_id', '=', $chiTiet->danh_muc_id)->get();
-        return view('pages.product_detail', compact('chiTiet', 'listDanhmuc', 'tuongTu', 'binhluan'));
+        $images = Image::where('product_id', $id)->get();
+        return view('pages.product_detail', compact('chiTiet', 'listDanhmuc', 'tuongTu', 'binhluan', 'images'));
     }
 
     public function gioiThieu()
@@ -99,7 +181,6 @@ class PageController extends Controller
     public function postDetail($id)
     {
         $post_detail = BaiViet::find($id);
-        // dd($post_detail);
         return view('pages.BaiViet.chitietbaiviet', compact('post_detail'));
     }
 
@@ -109,7 +190,13 @@ class PageController extends Controller
         $menu = DanhMuc::all();
         $sanPham = SanPham::where('ten_san_pham', 'like', '%' . $request->keyname . '%')
             ->orwhere('gia_ban', $request->keyname)->get();
-        // dd($sanPham);
         return view('pages.search', compact('sanPham', 'menu'));
+    }
+
+    public function ajaxSearch(Request $request)
+    {
+        $key = $request->keyname;
+        $products = SanPham::searchAjax($key)->get();
+        return view('pages.ajaxSearch', compact('products'));
     }
 }

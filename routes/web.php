@@ -34,15 +34,16 @@ use Whoops\RunInterface;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('TrangChu');
+Route::get('/load-more-products', [PageController::class, 'loadMoreProducts'])->name('loadMoreProducts');
+Route::get('/load-more-page-products', [PageController::class, 'loadMorePageProducts'])->name('loadMorePageProducts');
 Route::get('dang-ky', [AuthController::class, 'userRegister'])->name('pages.dangky');
 Route::post('dang-ky', [AuthController::class, 'userPostRegister'])->name('pages.postdangky');
-Route::get('xac-nhan-tai-khoan/{mail_user}/{token}', [AuthController::class, 'verifyRegisterMail'])->name('verify-register-mail');
+Route::get('xac-nhan-tai-khoan/{token}', [AuthController::class, 'verifyRegisterMail'])->name('verify-register-mail');
 Route::get('dang-nhap', [AuthController::class, 'userLogin'])->name('pages.dangnhap');
 Route::post('dang-nhap', [AuthController::class, 'postUserLogin'])->name('pages.postdangnhap');
 Route::get('dang-xuat', [AuthController::class, 'userLogout'])->name('pages.dangxuat');
 Route::get('san-pham/{id}', [PageController::class, 'getProduct'])->name('pages.product');
 Route::get('chi-tiet-san-pham/{slug}&id={id}', [PageController::class, 'getProductDetail'])->name('pages.chitietsanpham');
-Route::get('gioi-thieu', [PageController::class, 'gioiThieu'])->name('pages.gioithieu');
 Route::get('lien-he', [PageController::class, 'getLienhe'])->name('pages.lienhe');
 Route::get('gio-hang', [CartController::class, 'getCart'])->name('pages.giohang');
 Route::get('them-gio-hang/{id}', [CartController::class, 'addCart'])->name('pages.themgiohang');
@@ -51,7 +52,6 @@ Route::get('xoa/{id}', [CartController::class, 'deleteCart'])->name('pages.xoagi
 Route::prefix('thanh-toan')->middleware('payment')->group(function () {
     Route::get('/', [CartController::class, 'getPayment'])->name('pages.thanhtoan');
     Route::post('/', [CartController::class, 'postPayment'])->name('pages.postthanhtoan');
-    Route::post('thanh-toan', [CartController::class, 'postPayment2'])->name('pages.postthanhtoan2');
     Route::get('thong-bao', [CartController::class, 'notify'])->name('pages.thongbao');
 });
 
@@ -61,9 +61,9 @@ Route::post('thong-tin-ca-nhan', [TaiKhoanController::class, 'postUserProfile'])
 Route::get('doi-mat-khau', [TaiKhoanController::class, 'getUserPassword'])->name('pages.getmatkhau');
 Route::post('doi-mat-khau', [TaiKhoanController::class, 'postUserPassword'])->name('pages.postmatkhau');
 Route::get('don-hang', [TaiKhoanController::class, 'getUserOrder'])->name('pages.getdonhang');
+Route::get('chi-tiet-don-hang/{id}', [TaiKhoanController::class, 'getOrderDetail'])->name('pages.order.detail');
+
 Route::get('huy-don-hang/{id}', [TaiKhoanController::class, 'getHuy'])->name('pages.Huy');
-Route::get('cham-soc-khach-hang', [PageController::class, 'getCskh'])->name('pages.getcskh');
-Route::post('cham-soc-khach-hang', [PageController::class, 'postCskh'])->name('pages.postcskh');
 
 Route::post('binh-luan/{id}', [PageController::class, 'postComment'])->name('pages.postbinhluan');
 
@@ -77,7 +77,9 @@ Route::post('gui-mail', [AuthController::class, 'sendMail'])->name('pages.sendMa
 Route::get('quen-mat-khau', [AuthController::class, 'forgotPassword'])->name('pages.quenmatkhau');
 Route::get('update-new-pass', [AuthController::class, 'updatePass'])->name('pages.getUpdatePass');
 Route::post('update-new-pass', [AuthController::class, 'postUpdatePass'])->name('pages.postUpdatePass');
-Route::get('tìm-kiem', [PageController::class, 'search'])->name('pages.timkiem');
+Route::get('search', [PageController::class, 'search'])->name('pages.timkiem');
+Route::get('/ajax-search-product', [PageController::class, 'ajaxSearch'])->name('ajax-search-product');
+
 
 /*=== admin ===*/
 

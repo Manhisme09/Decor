@@ -16,6 +16,8 @@
     <link href="{{ asset('front-end/admin/css/metisMenu.min.css') }}" rel="stylesheet">
     <link href="{{ asset('front-end/admin/css/startmin.css') }}" rel="stylesheet">
     <link href="{{ asset('front-end/admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('front-end/admin/css/toastrmin.css') }}">
+
 </head>
 
 <body style="background-color: #fff">
@@ -31,7 +33,7 @@
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 @foreach ($errors->all() as $err)
-                                    {{ $err }}
+                                    {{ $err }} <br>
                                 @endforeach
                             </div>
                         @endif
@@ -44,18 +46,18 @@
                             @csrf
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Email" name="email" type="email"
-                                        autofocus required>
+                                    <input class="form-control" placeholder="Email" name="email"
+                                        autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Mật khẩu" name="password" type="password"
-                                        required>
+                                    >
                                 </div>
-                                <div class="checkbox">
+                                {{-- <div class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox">Ghi nhớ đăng nhập lần sau
                                     </label>
-                                </div>
+                                </div> --}}
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="Đăng nhập">
                             </fieldset>
@@ -71,6 +73,10 @@
     <script src="{{ asset('admins/js/metisMenu.min.js') }}"></script>
 
     <script src="{{ asset('admins/js/startmin.js') }}"></script>
+    <script src="{{ asset('front-end/admin/js/jquery.min.js') }}"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
+
 </body>
 
 </html>

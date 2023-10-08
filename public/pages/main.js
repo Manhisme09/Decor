@@ -183,88 +183,88 @@ let index = 0
 // }
 // changeslideProduce..............................................................
 
-function changeSlideProduct() {
-    // changeTitleAndProduce................................................................
+// function changeSlideProduct() {
+//     // changeTitleAndProduce................................................................
 
-    (function changeTitleAndProduct() {
-        const productProposeTitleActive = document.querySelector('.product-propose_title-name.active')
-        line.style.left = productProposeTitleActive.offsetLeft + 'px'
-        line.style.width = productProposeTitleActive.offsetWidth + 'px'
+//     (function changeTitleAndProduct() {
+//         const productProposeTitleActive = document.querySelector('.product-propose_title-name.active')
+//         line.style.left = productProposeTitleActive.offsetLeft + 'px'
+//         line.style.width = productProposeTitleActive.offsetWidth + 'px'
 
-        productProposeTitles.forEach((productProposeTitle, index) => {
-            const productProposeNew = productProposeNews[index]
+//         productProposeTitles.forEach((productProposeTitle, index) => {
+//             const productProposeNew = productProposeNews[index]
 
-            productProposeTitle.onclick = () => {
-                const productProposeTitleActive = document.querySelector('.product-propose_title-name.active')
-                productProposeTitleActive.classList.remove('active')
-                const productProposeNewActive = document.querySelector('.product-propose_new.active')
-                productProposeNewActive.classList.remove('active')
+//             productProposeTitle.onclick = () => {
+//                 const productProposeTitleActive = document.querySelector('.product-propose_title-name.active')
+//                 productProposeTitleActive.classList.remove('active')
+//                 const productProposeNewActive = document.querySelector('.product-propose_new.active')
+//                 productProposeNewActive.classList.remove('active')
 
-                line.style.left = productProposeTitle.offsetLeft + 'px'
-                line.style.width = productProposeTitle.offsetWidth + 'px'
+//                 line.style.left = productProposeTitle.offsetLeft + 'px'
+//                 line.style.width = productProposeTitle.offsetWidth + 'px'
 
-                productProposeTitle.classList.add('active')
-                productProposeNew.classList.add('active')
+//                 productProposeTitle.classList.add('active')
+//                 productProposeNew.classList.add('active')
 
-            }
-        })
-    })()
-
-
+//             }
+//         })
+//     })()
 
 
-    const nextSlideProduct = () => {
-        indexProduct++
-        tranformX = tranformX - 100
-
-        if (indexProduct > productProposeItems.length - 4) {
-            indexProduct = productProposeItems.length - 4
-            tranformX = -100 * indexProduct
-            return
-        }
-
-        for (const productProposeItem of productProposeItems) {
-            productProposeItem.style.transform = `translateX(${tranformX}%)`
-        }
-    }
-    setInterval(nextSlideProduct, 10000)
-
-    // nextProduct................................................................
-    productNext.addEventListener('click', () => {
-        handleChangeProduct(1)
-    })
-
-    //prevProduct................................................................
-    productPrev.addEventListener('click', () => {
-            handleChangeProduct(-1)
-        })
-        // handleChangeProduct................................................................
-    let indexProduct = 0
-    let tranformX = 0
-        // autoChangeProduct................................................................
-    function handleChangeProduct(e) {
-        if (e == 1) {
-            nextSlideProduct()
-
-        } else if (e == -1) {
-            indexProduct--
-            tranformX = tranformX + 100
-
-            if (indexProduct < 0) {
-                tranformX = 0
-                indexProduct = 0
-                return
-            }
-            for (const productProposeItem of productProposeItems) {
-                productProposeItem.style.transform = `translateX(${tranformX}%)`
-            }
-
-        }
-
-    }
 
 
-}
+//     const nextSlideProduct = () => {
+//         indexProduct++
+//         tranformX = tranformX - 100
+
+//         if (indexProduct > productProposeItems.length - 4) {
+//             indexProduct = productProposeItems.length - 4
+//             tranformX = -100 * indexProduct
+//             return
+//         }
+
+//         for (const productProposeItem of productProposeItems) {
+//             productProposeItem.style.transform = `translateX(${tranformX}%)`
+//         }
+//     }
+//     setInterval(nextSlideProduct, 10000)
+
+//     // nextProduct................................................................
+//     productNext.addEventListener('click', () => {
+//         handleChangeProduct(1)
+//     })
+
+//     //prevProduct................................................................
+//     productPrev.addEventListener('click', () => {
+//             handleChangeProduct(-1)
+//         })
+//         // handleChangeProduct................................................................
+//     let indexProduct = 0
+//     let tranformX = 0
+//         // autoChangeProduct................................................................
+//     function handleChangeProduct(e) {
+//         if (e == 1) {
+//             nextSlideProduct()
+
+//         } else if (e == -1) {
+//             indexProduct--
+//             tranformX = tranformX + 100
+
+//             if (indexProduct < 0) {
+//                 tranformX = 0
+//                 indexProduct = 0
+//                 return
+//             }
+//             for (const productProposeItem of productProposeItems) {
+//                 productProposeItem.style.transform = `translateX(${tranformX}%)`
+//             }
+
+//         }
+
+//     }
+
+
+// }
 
 
 

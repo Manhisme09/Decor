@@ -1,15 +1,18 @@
 @extends('pages.layouts.layout')
 @section('content')
-    {{-- <div class="inner-header">
-    <a href="{{ route('trangchu') }}"><i class="fa fa-home"></i> Home</a> /
-    <a href="{{ route('pages.getMatkhauUser') }}">Đổi mật khẩu</a>
-    <div class="clearfix"></div>
-</div> --}}
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-            <span><a href="{{ route('pages.getmatkhau') }}">Đổi mật khẩu</a></span>
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Đổi mật khẩu</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="main">
             <div class="grid wide">
                 <div class="profile-title">
@@ -32,7 +35,7 @@
                     @endif
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form action="" method="POST">
+                            <form class="form-change-password" action="" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="oldPassword">Mật khẩu cũ <span style="color: red">*</span></label>
@@ -49,15 +52,15 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="confirmPassword">Xác nhận mật khẩu mới <span
+                                    <label for="passwordAgain">Xác nhận mật khẩu mới <span
                                             style="color: red">*</span></label>
-                                    <input type="password" class="form-control" id="confirmPassword"
-                                        name="confirmPassword">
-                                    @error('confirmPassword')
+                                    <input type="password" class="form-control" id="passwordAgain"
+                                        name="passwordAgain">
+                                    @error('passwordAgain')
                                         <p style="color: red">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                <button type="submit" class="btn-my">Lưu</button>
                             </form>
                         </div>
                     </div>

@@ -3,11 +3,19 @@
     <title>Giỏ hàng | Nội thất Furnibuy</title>
 @endsection
 @section('content')
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-            <span><a href="{{ route('pages.giohang') }}">Giỏ hàng</a></span>
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="main">
             <div class="grid wide">
                 <div class="cart-title">
@@ -34,13 +42,14 @@
                                     @endphp
                                     @foreach (Session::get('Cart')->sanpham as $item)
                                         <tr align="center">
-                                            <td>{{ $s++ }}</td>
-                                            <td>{{ $item['sanphamInfo']->ten_san_pham }}</td>
-                                            <td><img src="{{ asset($item['sanphamInfo']->hinh_anh) }}" alt=""
-                                                    width="180px" height="120px"></td>
-                                            <td> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
+                                            <td style="vertical-align: middle">{{ $s++ }}</td>
+                                            <td style="vertical-align: middle">{{ $item['sanphamInfo']->ten_san_pham }}</td>
+                                            <td><img src="{{ asset($item['sanphamInfo']->image[0]->url) }}" alt=""
+                                                    width="150px" height="120px"></td>
+                                            <td style="vertical-align: middle; width: 200px"> {{ number_format($item['sanphamInfo']->gia_ban) }} VNĐ</td>
 
-                                            <td><select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
+                                            <td style="vertical-align: middle">
+                                                {{-- <select name="so_luong" id="select-{{ $item['sanphamInfo']->id }}"
                                                     data-idselect="{{ $item['sanphamInfo']->id }}"
                                                     onchange="updateItemCart({{ $item['sanphamInfo']->id }})"
                                                     style="width: 75px; height:30px">
@@ -49,11 +58,29 @@
                                                             @if ($i == $item['so_luong']) selected @endif>
                                                             {{ $i }}</option>
                                                     @endfor
-                                                </select>
+                                                </select> --}}
+                                                {{-- <div class="quantity buttons_added">
+                                                    <input type="number" hidden id="idProduct" value="{{ $item['sanphamInfo']->id }}">
+                                                    <input type="number" hidden id="quantityProduct" value="{{ $item['sanphamInfo']->so_luong }}">
+                                                    <input type="button" value="-" class="minus button is-form">
+                                                    <input type="number" id="quantity" class="input-text qty text" step="1" min="0" max="" name="cart[5589b748dedc01ec8041656653952749][qty]" value="{{ $item['so_luong'] }}" title="Qty" size="4" inputmode="numeric">
+                                                    <input type="button" value="+" class="plus button is-form">
+                                                </div> --}}
+
+                                                <div class="quantity buttons_added">
+                                                    <input type="number" class="productId" value="{{ $item['sanphamInfo']->id }}" hidden>
+                                                    <input type="number" class="productQuantity" value="{{ $item['sanphamInfo']->so_luong }}" hidden>
+                                                    <input type="number" class="oldQuantity" value="{{ $item['so_luong'] }}" hidden>
+                                                    <input type="button" value="-" class="minus button is-form">
+                                                    <input type="number" class="input-text qty text productQtyInput" step="1" min="0" max=""
+                                                        value="{{ $item['so_luong'] }}" title="Qty" size="4" inputmode="numeric" data-productid="{{ $item['sanphamInfo']->id }}">
+                                                    <input type="button" value="+" class="plus button is-form">
+                                                </div>
+
                                             </td>
 
-                                            <td>
-                                                <a class="remove" style="cursor: pointer"
+                                            <td style="vertical-align: middle">
+                                                <a class="remove" style="cursor: pointer; color: #f76b6a"
                                                     onclick="deleteCart({{ $item['sanphamInfo']->id }})"
                                                     title="Xoá sản phẩm"><i class="fa fa-trash"></i></a>
                                             </td>
@@ -101,7 +128,7 @@
                                             0
                                         @endif
                                     </span></div>
-                                <div class="cart-totals-row"><a class="btn"
+                                <div class="cart-totals-row"><a class="btn beta-btn primary"
                                         href="{{ route('pages.thanhtoan') }}" style="margin: 0 130px">Đặt hàng</a></div>
                             </div>
 

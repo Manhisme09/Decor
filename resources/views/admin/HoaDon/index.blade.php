@@ -42,7 +42,7 @@
                                                 {{ $i++ }}</td>
                                             <td style="text-align: center; color: red"><b>HD{{ $hd->id }}</b></td>
                                             <td>{{ $hd->khach_hang ? $hd->khach_hang->ho_ten : '' }}</td>
-                                            <td>{{ $hd->tong_tien }}</td>
+                                            <td>{{ number_format($hd->tong_tien) }} VNĐ</td>
                                             <td>{{ date('d-m-Y', strtotime($hd->ngay_lap)) }}</td>
                                             <td>
                                                 @if ($hd->status == 0)
@@ -79,9 +79,9 @@
                                                 <a class="btn btn-primary btn-xs btn-view" href="#"
                                                     data-url="{{ route('admin.hoadon.getView', ['id' => $hd->id]) }}" ​><i
                                                         class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết</a>
-                                                <a class="btn btn-success btn-xs"
+                                                {{-- <a class="btn btn-success btn-xs"
                                                     href="{{ route('admin.hoadon.inhoadon', ['id' => $hd->id]) }}"><i
-                                                        class="fa fa-print" aria-hidden="true"></i> In hoá đơn</a>
+                                                        class="fa fa-print" aria-hidden="true"></i> In hoá đơn</a> --}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -120,33 +120,30 @@
                     $('#dien_thoai').text(data.khach_hang.dien_thoai);
                     $('#table-body').html('');
                     totalPrice = 0;
+                    function formatCurrency(amount) {
+                        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+                    }
+
                     data.chi_tiet_hoa_don.forEach((element, index) => {
-                        if (element.san_pham != null) {
-                            html = `
-                                <tr>
-                                    <td>${index+1}</td>
-                                    <td>${element.san_pham.ten_san_pham}</td>
-                                    <td>${element.so_luong}</td>
-                                    <td>${element.don_gia} VNĐ</td>
-                                    <td>${element.thanh_tien} VNĐ</td>
-                                </tr>
-                            `
-                        } else {
-                            html = `
-                                <tr>
-                                    <td>${index+1}</td>
-                                    <td>Sản phẩm đã bị xoá</td>
-                                    <td>${element.so_luong}</td>
-                                    <td>${element.don_gia} VNĐ</td>
-                                    <td>${element.thanh_tien} VNĐ</td>
-                                </tr>
-                            `
-                        }
+                        const tenSanPham = element.san_pham ? element.san_pham.ten_san_pham : 'Sản phẩm đã bị xoá';
+                        const donGiaFormatted = formatCurrency(element.don_gia);
+                        const thanhTienFormatted = formatCurrency(element.thanh_tien);
+
+                        const html = `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${tenSanPham}</td>
+                                <td>${element.so_luong}</td>
+                                <td>${donGiaFormatted}</td>
+                                <td>${thanhTienFormatted}</td>
+                            </tr>
+                        `;
+
                         $('#table-body').append(html);
-                        totalPrice += element.thanh_tien
+                        totalPrice += element.thanh_tien;
                     });
 
-                    $('#tong_tien').text(totalPrice + ' VNĐ');
+                    $('#tong_tien').text(formatCurrency(totalPrice));
 
 
 

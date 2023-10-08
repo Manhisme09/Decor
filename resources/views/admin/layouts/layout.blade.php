@@ -19,6 +19,7 @@
     <link href="{{ asset('front-end/admin/css/startmin.css') }}" rel="stylesheet">
     <link href="{{ asset('front-end/admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('front-end/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('front-end/admin/css/toastrmin.css') }}">
 
 </head>
 
@@ -72,13 +73,13 @@
                             <a href="{{ route('admin.khachhang.index') }}"><i class="fa fa-group fa-fw"></i> Quản lý
                                 khách hàng</a>
                         </li>
-                        @if (Auth::user()->role == 1)
+                        {{-- @if (Auth::user()->role == 1)
                             <li>
                                 <a href="{{ route('admin.nhanvien.index') }}"><i class="fa fa-group fa-fw"></i> Quản
                                     lý
                                     nhân viên</a>
                             </li>
-                        @endif
+                        @endif --}}
                         <li>
                             <a href="{{ route('admin.binhluan.index') }}"><i class="fa fa-comment"></i> Quản lý bình
                                 luận</a>
@@ -95,10 +96,10 @@
                             <a href="{{ route('admin.voucher.index') }}"><i class="fa fa-info-circle"></i> Quản lý
                                 phiếu giảm giá</a>
                         </li> --}}
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('admin.cskh.index') }}"><i class="fa fa-info-circle"></i> Quản lý liên
                                 hệ</a>
-                        </li>
+                        </li> --}}
                         @if (Auth::user()->role == 1)
                             <li>
                                 <a href="{{ route('admin.thongke.index') }}"><i class="fa fa-bar-chart"></i> Thống
@@ -131,7 +132,8 @@
     <script src="{{ asset('front-end/admin/js/startmin.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
-
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
     <script>
         $(document).ready(function() {
             $('#table-admin').DataTable({

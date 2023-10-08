@@ -9,6 +9,7 @@ use App\Models\HoaDon;
 use App\Models\SanPham;
 use Illuminate\Support\Str;
 use Mpdf\Tag\Em;
+use Brian2694\Toastr\Facades\Toastr;
 
 class DanhMucController extends Controller
 {
@@ -40,7 +41,8 @@ class DanhMucController extends Controller
         $danhmuc->parent_id = $request->parent_id;
         $danhmuc->slug = Str::slug($request->ten_danh_muc);
         $danhmuc->save();
-        return redirect()->back()->with('thongbao', 'Đã thêm danh mục!');
+        Toastr::success('Thêm danh mục thành công!', 'Thành công');
+        return redirect()->back();
     }
 
     public function getSua($id)
@@ -64,7 +66,8 @@ class DanhMucController extends Controller
         $danhmuc->parent_id = $request->parent_id;
         $danhmuc->slug = Str::slug($request->ten_danh_muc);
         $danhmuc->save();
-        return redirect()->route('admin.DanhMuc.index')->with('thongbao', 'Đã sửa thông tin danh mục!');
+        Toastr::success('Sửa danh mục thành công!', 'Thành công');
+        return redirect()->route('admin.DanhMuc.index');
     }
 
     public function getXoa($id)

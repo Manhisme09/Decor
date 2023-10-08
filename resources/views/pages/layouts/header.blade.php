@@ -1,15 +1,144 @@
 <div class="header">
-    @php $menusHtml = \App\Helpers\Helper::menus($danhmuc); @endphp
+    {{-- @php $menusHtml = \App\Helpers\Helper::menus($danhmuc); @endphp --}}
     <!-- header-info -->
+    <div class="header-first">
+        <div class="header-contact">
+            <div style="padding-top: 57px">
+                <i class="fab fa-facebook-f" style="font-size: 17px"></i>
+                <i class="fab fa-tiktok" style="font-size: 17px; margin: 0 15px"></i>
+                <i class="fab fa-youtube" style="font-size: 17px"></i>
+            </div>
+            <div class="header-logo-image">
+                <a href="{{ route('TrangChu') }}"> <img style="width: 350px;
+                    height: 100px" src="{{ asset('images/bannerlogo.png') }}" alt="">
+                </a>
+            </div>
+            <div class="multi-myaccount">
+                <button class="myaccount">
+                    @if (Auth::user())
+                        <div style="display:flex; justify-content:space-between">
+                            <div><i class="fas fa-user"></i></div>
+                            <div style="padding: 0 7px">{{ Auth::user()->khach_hang->ho_ten }}</div>
+                            <div><i class="fas fa-angle-down"></i></div>
+                        </div>
+                    @else
+                        <div style="display:flex; justify-content:space-between; width:105px">
+                            <div><i class="fas fa-user"></i></div>
+                            <div>My account</div>
+                            <div><i class="fas fa-angle-down"></i></div>
+                        </div>
+                    @endif
+                </button>
+                @if ( Auth::check() && Auth::user()->role === 5 )
+                        <ul class="account-item infor-account">
+                            <li class="infor-account-item"><a href="{{ route('pages.getthongtin') }}"><i class="fas fa-info-circle"></i>  <span>Thông tin
+                                tài khoản</span> </a></li>
+                            <li class="divider"></li>
+                            <li class="infor-account-item"><a href="{{ route('pages.getdonhang') }}"><i class="fas fa-file-invoice"></i> <span>Đơn hàng</span> </a></li>
+                            <li class="divider"></li>
+                            <li class="infor-account-item"><a href="{{ route('pages.getmatkhau') }}"><i class="fas fa-key"></i> <span>Đổi mật khẩu</span></a></li>
+                            <li class="divider"></li>
+                            <li class="infor-account-item"><a href="{{ route('pages.dangxuat') }}"><i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span> </a></li>
+                        </ul>
+                @else
+                    <ul class="account-item">
+                        <li class="account-bar">
+                            <a class="account-icon" href="{{ route('pages.dangnhap') }}">
+                                Đăng nhập
+                            </a>
+                        </li>
+                        <li class="account-bar">
+                            <a class="account-icon" href="{{ route('pages.dangky') }}">
+                            Đăng ký
+                            </a>
+                        </li>
+                    </ul>
+                @endif
+            </div>
+            <div class="item-header">
+                <div class="multi-lang">
+                    <button class="language">
+                        <span class="getLang">
+                            {{-- @if (Session::get('language') == 'en'|| Session::get('language') == null) --}}
+                            <div class="flag-icon">
+                                <img src="{{ asset('images/en.png') }}" alt="en" class="flag">
+                                <span>English</span>
+                                <div><i class="fas fa-angle-down"></i></div>
 
-    <div class="grid wide">
+                            </div>
+                            {{-- @elseif (Session::get('language') == 'vi') --}}
+                            {{-- <div class="flag-icon">
+                                <img src="{{ asset('images/vn.jpg') }}" alt="en" class="flag">
+                                <span>VietNam</span>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div> --}}
+                            {{-- @endif --}}
+                        </span>
+                    </button>
+                    <ul class="language-item">
+                        <li class="language-bar">
+                            <a class="flag-icon">
+                                <img src="{{ asset('images/en.png') }}" alt="EN" class="flag">
+                                <span>English</span>
+                            </a>
+                        </li>
+                        <li class="language-bar">
+                            <a class="flag-icon">
+                                <img src="{{ asset('images/vn.jpg') }}" alt="VN" class="flag">
+                                <span>VietNam</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="icon-cart">
+                    <a href="{{ route('pages.giohang') }}">
+                        <i class="fas fa-shopping-cart fa-lg"><span class="count-item">
+                            @if (isset(Session::get('Cart')->tongsoluong))
+                            {{ number_format(Session::get('Cart')->tongsoluong) }}
+                        @else
+                            0
+                        @endif
+                        </span></i>
+                    </a>
+                </div>
+
+                <div class="icon-search-head">
+                    <a href="#" class="search-icon" data-toggle="modal" data-target="#searchModal">
+                        <i class="fas fa-search fa-lg"></i>
+                    </a>
+                </div>
+
+                <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="searchModalLabel">Tìm kiếm</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="close-icon" aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="{{ route('pages.timkiem') }}" method="GET" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" id="search-ajax" name="keyname" type="search" placeholder="Sản phẩm bạn muốn tìm..." aria-label="Search">
+                            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">
+                                <span style="color: #ffff" class="fa fa-search"></span>
+                            </button>
+                          </form>
+                        </div>
+                        <div class="wrap_suggest" id="show_search">
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="grid wide">
         <div id="top" class="header-info">
-            <p class="header-info_phone">Hotline : 0378642530</p>
+            <p class="header-info_phone">Hotline : 0858901689</p>
             <div class="header-info_about">
                 @if (Session('login'))
-                    <div class="dropdown">
-                        <a href="{{ route('pages.gioithieu') }}" class="header-info_about-content btn">Giới thiệu</a>
-                    </div>
                     <div class="dropdown">
                         <a href="{{ route('pages.getcskh') }}" class="header-info_about-content btn">CSKH</a>
                     </div>
@@ -29,9 +158,6 @@
                         </ul>
                     </div>
                 @elseif (Auth::check() && Auth::user()->role === 5)
-                    <div class="dropdown">
-                        <a href="{{ route('pages.gioithieu') }}" class="header-info_about-content btn">Giới thiệu</a>
-                    </div>
                     <div class="dropdown">
                         <a href="{{ route('pages.getcskh') }}" class="header-info_about-content btn">CSKH</a>
                     </div>
@@ -55,9 +181,6 @@
                     </div>
                 @else
                     <div class="dropdown">
-                        <a href="{{ route('pages.gioithieu') }}" class="header-info_about-content btn">Giới thiệu</a>
-                    </div>
-                    <div class="dropdown">
                         <a href="{{ route('pages.getcskh') }}" class="header-info_about-content btn">CSKH</a>
                     </div>
                     <div class="dropdown">
@@ -70,114 +193,70 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 
 
     <!-- header-bottom -->
-    <div class="grid wide">
-        <div class="header-bottom">
-            <div class="header-bottom_logo">
-                <img src="../images/logo_furnibuy.png" alt="">
-            </div>
-            <div class="header-bottom_search">
-                <div class="header-bottom_menu">
-                    <div class="header-bottom_menu-icon">
-                        <i class="fas fa-bars"></i>
-                    </div>
-                    <div class="header-bottom_menu-list">
-                        <ul class="nav-list_responsive">
-                            <div class="nav-list_responsive-icon">
-                                <i class="fas fa-times"></i>
-                            </div>
-                            <li class="nav-itemRespponsive">TRANG CHỦ
-                            </li>
-                            <li class="nav-itemRespponsive">TRẺ EM
-                            </li>
-                            <li class="nav-itemRespponsive">NAM
-                            </li>
-                            <li class="nav-itemRespponsive">NỮ
-                            </li>
-                            <li class="nav-itemRespponsive">TIÊU DÙNG
-                            </li>
-                            <li class="nav-itemRespponsive">LÀM ĐẸP
-                            </li>
-                            <li class="nav-itemRespponsive">MADE BY ANGELS
-                            </li>
-                            <li class="nav-itemRespponsive">COMBO
-                            </li>
-                            <li class="nav-itemRespponsive">TIN TỨC
-                            </li>
-                        </ul>
-                    </div>
-
-
-
-                </div>
-                {{-- <div class="beta-comp">
-                    <form role="search" method="get" id="searchform" action="{{ route('pages.timkiem') }}">
-                        <input type="text" value="" name="keyname" id="s" placeholder="Nhập từ khóa..." />
-                        <button class="fa fa-search" type="submit" id="searchsubmit"></button>
-                    </form>
-                </div> --}}
-                <form style="display: flex; width: 100%;" role="search" method="get" id="searchform"
-                    action="{{ route('pages.timkiem') }}">
-                    <input name="keyname" class="header-bottom_search-input" type="text" placeholder="Tìm kiếm...">
-                    <button class="header-bottom_search-btn"><i class="fas fa-search"></i></button>
-                </form>
-
-                <div class="header-bottom_cart reponsive">
-                    <button class="header-bottom_cart-icon header-bottom_cart-icon2">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
-                    <p class="header-bottom_cart-info header-bottom_cart-info2">0 sản phẩm
-                        <br> <span>0 ₫</span>
-                    </p>
-
-                </div>
-            </div>
-
-            <div class="header-bottom_cart pc">
-                <a href="{{ route('pages.giohang') }}" class="header-bottom_cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-                <p class="header-bottom_cart-info header-bottom_cart-info1">
-                    @if (isset(Session::get('Cart')->tongsoluong))
-                        {{ number_format(Session::get('Cart')->tongsoluong) }} sản phẩm
-                    @else
-                        0 sản phẩm
-                    @endif
-                    <br> <span>
-                        @if (isset(Session::get('Cart')->tonggia))
-                            {{ number_format(Session::get('Cart')->tonggia) }} VNĐ
-                        @else
-                            0 VNĐ
-                        @endif
-                    </span>
-                </p>
-            </div>
-
-        </div>
-    </div>
-    <div class="introduce-container">
-        <div class="">
-            <div class="row no-gutters">
-                <div class="col m-12 c-12">
-                    <div class="nav-container">
-                        <ul class="nav-list" style="margin-bottom: 0px;">
-                            <li class="nav-item"><a class="menu" href="{{ route('TrangChu') }}">TRANG
-                                    CHỦ</a></li>
-                            {!! $menusHtml !!}
-
-                            <li class="nav-item"><a class="menu"
-                                    href="{{ route('pages.baiviet') }}">TIN TỨC</a>
-                            </li>
-                            <li class="nav-item"><a class="menu"
-                                    href="{{ route('pages.lienhe') }}">LIÊN HỆ</a>
-                            </li>
-                        </ul>
+    <div class="grid wide" style="height: 60px; line-height:50px; border-color: #f76b6a;">
+        <div class="introduce-container">
+                <div class="row no-gutters">
+                    <div class="col m-12 c-12">
+                        <div class="nav-container">
+                            <ul class="nav-list" style="margin-bottom: 0px;">
+                                <li class="nav-item"><a class="menu" href="{{ route('TrangChu') }}">TRANG
+                                        CHỦ</a></li>
+                                <li class="nav-item">
+                                    <a class="menu product">Sản Phẩm</a>
+                                    <div class="list-product">
+                                        <ul class="ul-list-product">
+                                        @foreach ($categorys_big as $item)
+                                            <li class="li-list-product">{{ $item->ten_danh_muc}}
+                                                @php
+                                                    $subCategories = \App\Helpers\Helper::getSubCategories($item->id);
+                                                @endphp
+                                                @if ($subCategories->count() > 0)
+                                                <div class="sub-product">
+                                                    <ul class="ul-sub-product">
+                                                        @foreach ($subCategories as $subCategory)
+                                                        <li class="li-sub-product"><a href="/san-pham/{{ $subCategory->id }}">{{ $subCategory->ten_danh_muc }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                        </ul>
+                                    </div>
+                                </li>
+                                @foreach ($categorys as $category)
+                                    <li class = "nav-item many">
+                                        <a class = "menu" href="/san-pham/{{ $category->id }}">
+                                             {{ $category->ten_danh_muc }}
+                                        </a>
+                                        @php
+                                            $subCategories = \App\Helpers\Helper::getSubCategories($category->id);
+                                        @endphp
+                                        @if ($subCategories->count() > 0)
+                                        <div class="bar-item_propose nav-item_propose">
+                                            <ul class="bar-item_propose-list">
+                                                @foreach ($subCategories as $subCategory)
+                                                    <li><a href="/san-pham/{{ $subCategory->id }}">{{ $subCategory->ten_danh_muc }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+                                    </li>
+                                @endforeach
+                                <li class="nav-item"><a class="menu"
+                                        href="{{ route('pages.baiviet') }}">TIN TỨC</a>
+                                </li>
+                                <li class="nav-item"><a class="menu"
+                                        href="{{ route('pages.lienhe') }}">LIÊN HỆ</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

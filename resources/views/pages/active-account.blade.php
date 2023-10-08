@@ -11,12 +11,12 @@
 
 <body>
     <div>
-        <h2>Xin chào {{ $data['ho_ten'] }}</h2>
+        <h2>Xin chào {{ $user['ho_ten'] }}</h2>
         <p>Cảm ơn bạn đã đăng ký tài khoản trên hệ thống của chúng tôi</p>
         <p>Để kích hoạt tài khoản, bạn vui lòng click vào nút kích hoạt tài khoản bên dưới</p>
         <p>
             <a
-                href="{{ route('verify-register-mail', ['mail_user' => $data['email'], 'token' => $data['register_token']]) }}">Kích
+                href="{{ route('verify-register-mail', ['token' => $user['register_token']]) }}">Kích
                 hoạt tài khoản
             </a>
         </p>

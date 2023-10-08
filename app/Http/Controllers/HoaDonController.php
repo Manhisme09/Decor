@@ -22,6 +22,13 @@ class HoaDonController extends Controller
         $hoadon = HoaDon::find($id);
         $hoadon->status = 1;
         $hoadon->update();
+        $chiTietHoaDon = $hoadon->chi_tiet_hoa_don;
+        foreach ($chiTietHoaDon as $key => $value) {
+            $sanpham = SanPham::find($value->san_pham_id);
+            $sanpham->so_luong -= $value->so_luong;
+            $sanpham->da_ban += $value->so_luong;
+            $sanpham->save();
+        }
         return redirect()->back()->with('thongbao', 'Xác nhận đơn hàng HD' . $hoadon->id . 'thành công');
     }
 

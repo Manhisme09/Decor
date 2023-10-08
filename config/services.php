@@ -20,6 +20,10 @@ return [
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
+    'split_token' => '_time_',
+    'verification_time' => '2',
+    'email_root' => 'manht9090@gmail.com',
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],

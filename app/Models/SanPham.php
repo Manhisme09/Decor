@@ -32,4 +32,13 @@ class SanPham extends Model
     public function chi_tiet_hoa_don(){
         return $this->hasMany(ChiTietHoaDon::class, 'san_pham_id');
     }
+
+    public function image(){
+        return $this->hasMany(Image::class, 'product_id');
+    }
+
+    public function scopeSearchAjax($query, $key)
+    {
+        return $query->where('ten_san_pham', 'LIKE', "%{$key}%")->limit(3);
+    }
 }

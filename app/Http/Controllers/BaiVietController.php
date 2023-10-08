@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BaiViet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class BaiVietController extends Controller
 {
@@ -47,7 +48,8 @@ class BaiVietController extends Controller
         }
 
         $baiviet->save();
-        return redirect()->back()->with('thongbao', 'Thêm bài viết thành công!');
+        Toastr::success('Thêm bài viết thành công!', 'Thành công');
+        return redirect()->route('admin.baiviet.index');
     }
 
     public function getSua($id)
@@ -86,7 +88,8 @@ class BaiVietController extends Controller
         }
 
         $baiviet->save();
-        return redirect()->route('admin.baiviet.index')->with('thongbao', 'Sửa bài viết thành công!');
+        Toastr::success('Sửa bài viết thành công!', 'Thành công');
+        return redirect()->route('admin.baiviet.index');
     }
 
     public function xoa($id)
@@ -97,6 +100,7 @@ class BaiVietController extends Controller
             unlink($destinationPath);
         }
         $baiviet->delete();
-        return redirect()->back()->with('thongbao', 'Đã xoá bài viết!');
+        Toastr::success('Xóa bài viết thành công!', 'Thành công');
+        return redirect()->back();
     }
 }

@@ -77,12 +77,13 @@
 
                                     <div class="form-group">
                                         <div class="input-group mb-3">
-                                            <div class="custom-file">
+                                            <div class="custom-file" style="margin-bottom: 25px">
                                                 <label for="hinh_anh">Hình ảnh sản phẩm <span style="color: red">*</span></label>
-                                                <input type="file" class="custom-file-input" id="hinh_anh" name="hinh_anh">
+                                                <input type="file" class="custom-file-input" id="hinh_anh" name="hinh_anh[]" multiple>
                                             </div>
                                             <span>Xem trước: </span>
-                                            <img id="blah" width="250px" height="150px" src="">
+                                            <div class="preview-images">
+                                            </div>
                                         </div>
                                         @error('hinh_anh')
                                             <p style="color: red"> {{ $message }}</p>
@@ -116,16 +117,21 @@
 @section('script')
     <script type="text/javascript">
         function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#blah').attr('src', e.target.result);
+            if (input.files && input.files.length > 0) {
+                $('.preview-images').empty();
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var imgElement = $('<img width="250px" height="150px">').attr('src', e.target.result).addClass('preview-image');
+                        $('.preview-images').append(imgElement);
+                    }
+                    reader.readAsDataURL(input.files[i]);
                 }
-                reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#hinh_anh").change(function() {
-            readURL(this);
-        });
+
+$("#hinh_anh").change(function() {
+    readURL(this);
+});
     </script>
 @endsection

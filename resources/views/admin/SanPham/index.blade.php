@@ -61,8 +61,9 @@
                                                 {{ $sp->ten_san_pham }}
                                             </td>
                                             <td class="" style="">
-                                                <img src="{{ asset($sp->hinh_anh) }}" alt="" srcset="" width="220px"
-                                                    height="150px">
+                                                @if(isset($sp->image[0]))
+                                                <img src="{{ asset($sp->image[0]->url) }}" alt="" srcset="" width="220px" height="150px">
+                                                 @endif
                                             </td>
                                             <td class="" style="">{{ $sp->so_luong }}</td>
                                             <th>{{ $sp->da_ban }}</th>

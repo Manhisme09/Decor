@@ -40,7 +40,7 @@
                                 value="{{ old('hinh_anh') }}">
                         </div>
                         <span>Xem trước: </span>
-                        <img id="blah" width="350px" height="200px" src="">
+                        <div class="preview-images">
                         @error('hinh_anh')
                             <p style="color: red">{{ $message }}</p>
                         @enderror
@@ -73,16 +73,21 @@
 @section('script')
     <script type="text/javascript">
         function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#blah').attr('src', e.target.result);
+            if (input.files && input.files.length > 0) {
+                $('.preview-images').empty();
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var imgElement = $('<img width="250px" height="150px">').attr('src', e.target.result).addClass('preview-image');
+                        $('.preview-images').append(imgElement);
+                    }
+                    reader.readAsDataURL(input.files[i]);
                 }
-                reader.readAsDataURL(input.files[0]);
             }
         }
-        $("#hinh_anh").change(function() {
-            readURL(this);
-        });
+
+$("#hinh_anh").change(function() {
+    readURL(this);
+});
     </script>
 @endsection

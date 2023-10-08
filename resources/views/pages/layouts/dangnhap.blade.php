@@ -3,22 +3,29 @@
     <title>Đăng nhập tài khoản | Nội thất Furnibuy</title>
 @endsection
 @section('content')
-    <div class="container">
-        <div class="mapping">
-            <span><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></span> /
-            <span><a href="{{ route('pages.dangnhap') }}">Đăng nhập</a></span>
+    <div class="banner-head">
+        <div class="banner-head">
+            <div class="url-main">
+                <nav aria-label="breadcrumb row">
+                    <ol class="breadcrumb url-menu">
+                        <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
+    </div>
+    <div class="container">
         <div class="main">
             <div class="grid wide">
                 <div class="login-title">
-                    <h3>ĐĂNG NHẬP</h3>
                 </div>
                 <div class="login-content">
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-4">
+                        <div class="form-login">
                             <div class="login-panel panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Xin mời bạn đăng nhập vào hệ thống !</h3>
+                                    <h3 class="panel-title" style="line-height: 35px">Xin mời bạn đăng nhập vào hệ thống !</h3>
                                 </div>
                                 <div class="panel-body">
                                     @if (count($errors) > 0)
@@ -50,20 +57,28 @@
                                                     type="password" required>
                                             </div>
                                             <div class="checkbox">
-                                                <label>
-                                                    <input name="remember" type="checkbox">Ghi nhớ đăng nhập
-                                                </label>
-                                                <a style="margin-left: 60px" href="{{ route('pages.quenmatkhau') }}">Quên
-                                                    mật khẩu?</a>
+                                                <div>
+                                                    {{-- <input name="remember" type="checkbox">Ghi nhớ đăng nhập --}}
+                                                </div>
+                                                <div>
+                                                    <a style="margin-left: 60px" href="{{ route('pages.quenmatkhau') }}">Quên
+                                                        mật khẩu?</a>
+                                                </div>
                                             </div>
 
                                             <!-- Change this to a button or input when using this as a form -->
-                                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Đăng nhập">
-                                            <a href="{{ route('pages.dangnhapgg') }}"
-                                                class="btn-lg btn-primary btn-block hover"> Đăng nhập bằng google</a>
-                                            <hr>
+                                            <input type="submit" class="btn-lg btn-block btn-my" value="Đăng nhập">
+                                            {{-- <a href="{{ route('pages.dangnhapgg') }}"
+                                                class="btn-lg btn-primary btn-block hover btn-my"> Đăng nhập bằng google</a> --}}
+
+                                            <div class="login-google">
+                                                 <a href="{{ route('pages.dangnhapgg') }}" class="btn-google col-sm-12">
+                                                    <img class="google-sign" src="https://rs.haposoft.com/images/google.png" alt="Google sign-in">
+                                                    Đăng nhập bằng google
+                                                </a>
+                                            </div>
                                             <a href="{{ route('pages.dangky') }}"
-                                                class="btn-lg btn-success btn-block hover">Tạo tài khoản mới</a>
+                                                class="btn-lg btn-success btn-block hover btn-my">Tạo tài khoản mới</a>
                                         </fieldset>
                                     </form>
                                 </div>
