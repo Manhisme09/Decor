@@ -49,7 +49,7 @@ class BaiVietController extends Controller
 
         $baiviet->save();
         Toastr::success('Thêm bài viết thành công!', 'Thành công');
-        return redirect()->back();
+        return redirect()->route('admin.baiviet.index');
     }
 
     public function getSua($id)

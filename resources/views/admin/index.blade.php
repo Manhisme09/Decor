@@ -103,7 +103,7 @@
                 </a>
             </div>
         </div>
-        @if (Auth::user()->role == 1)
+        {{-- @if (Auth::user()->role == 1)
             <div class="col-lg-3 col-md-6">
                 <div class="panel panel-green">
                     <div class="panel-heading">
@@ -127,7 +127,7 @@
                     </a>
                 </div>
             </div>
-        @endif
+        @endif --}}
 
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-green">

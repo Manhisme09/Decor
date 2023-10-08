@@ -9,7 +9,7 @@
             <div class="url-main">
                 <div class="url-title">{{ $post_detail->tieu_de }}</div>
                 <nav aria-label="breadcrumb row">
-                    <ol class="breadcrumb url-menu">
+                    <ol class="breadcrumb url-menu nav-product">
                         <li class="breadcrumb-item"><a href="{{ route('TrangChu') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('pages.baiviet') }}">Tin tức</a></li>
                     </ol>
